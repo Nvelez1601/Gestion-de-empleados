@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Escaneo de salida</title>
+
+        <!-- Vinculos de hoja de estilos y normalize -->
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+
+        <!-- Fuentes de la pagina GoogleFonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <!-- Vinculo a los archivos JavaScript -->
+        <script src="/js/main.js" defer></script>
+        <script src="/js/efectos.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    </head>
+
+    <!-- Cuerpo de la página -->
+    <body>
+
+        <!-- Fondo de partículas -->
+        <div id="particles-js"></div>
+
+        <!-- Recuadro de opciones -->
+        <div class="opciones-acceso">
+            
+            <img src="/img/logo_usm.png" alt="Logo Santa Maria" class="">
+            
+            <h1>Marcar salida</h1>
+
+            <!-- Contenedor para la cámara que leerá los QR -->
+            <div id="contenedor-camara">
+                <video id="mostrar-camara" autoplay playsinline></video>
+            </div>
+
+            <p>Acerque a la cámara el código QR que se encuentra en su credencial de empleado.</p>
+        </div>
+    </body>
+
+</html>

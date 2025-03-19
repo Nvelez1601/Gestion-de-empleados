@@ -1,4 +1,4 @@
-// Ejecutar automáticamente al cargar la página de marcar entrada
+// Ejecutar automáticamente al cargar la página de marcar entrada y salida
 // Utilizamos la API de MediaDevices.getUserMedia, que es una API nativa de navegadores actuales
 window.onload = async function () {
     const cameraContainer = document.getElementById("contenedor-camara");
@@ -18,3 +18,18 @@ window.onload = async function () {
     }
 };
 
+// -------------------------------------------------------------------------------------------
+
+// Eventos para aplicar transiciones en los distintos formularios (COMENTAR TODO CTRL + K + C ; DESCOMENTAR CTRL + K + U)
+const contenedor_registro = document.querySelector(".contenedor-registro");
+const btnInicioSesion = document.getElementById("btn-inicio-sesion");
+const btnRegistro = document.getElementById("btn-registro");
+
+// Al hacer click quitar la clase "toggle"
+btnInicioSesion.addEventListener("click", ()=>{
+    contenedor_registro.classList.remove("toggle");
+});
+// Al hacer click añadir la clase "toggle"
+btnRegistro.addEventListener("click", ()=>{
+    contenedor_registro.classList.add("toggle");
+});

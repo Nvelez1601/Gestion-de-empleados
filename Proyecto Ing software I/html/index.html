@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Control de acceso de empleados</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Vinculos de hoja de estilos y normalize -->
-        <link rel="stylesheet" href="/css/normalize.css">
-        <link rel="stylesheet" href="/css/style.css">
+    <title>Control de acceso de empleados</title>
 
-        <!-- Fuentes de la pagina GoogeFonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Vinculos de APIS de fuentes y hojas de estilos -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-        <!-- Vinculo a los archivos JavaScript -->
-        <script src="/js/main.js" defer></script>
-    </head>
+    <!-- Vinculos de JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/js/efectos.js" defer></script>
+    <script src="/js/efectos.js" defer></script>
+</head>
 
-    <!-- Cuerpo de la página -->
-    <body>
+<!-- Cuerpo principal de la pagina -->
+<body>
 
-        <!-- Recuadro de opciones -->
-        <div class="opciones-acceso">
+    <!-- Fondo de partículas -->
+    <div id="particles-js"></div>
 
-            <h1>Control de acceso de empleados</h1>
-
-            <!-- Incluimos los botones dentro de un div para darle estilos y arreglos a su espacio interno, ademas de incluir vinculos -->
-            <div class="espaciado">
-                <a href="marcar_entrada.html"><input type="submit" value="Marcar entrada"></a>
-                <a href="#"><input type="submit" value="Marcar salida"></a>
-                <a href="#"><input type="submit" value="Aceeso de visitantes"></a>
-            </div>
+    <!-- Contenedor principal -->
+    <div class="opciones-acceso">
+        <img src="/img/logo_usm.png" alt="Logo Santa Maria" class="">
+        <h1>Control de acceso de empleados</h1>
+        <div class="espaciado">
+            <a href="marcar_entrada.html"><button class="btn-marcaje"><i class="fas fa-sign-in-alt"></i>Marcar entrada</button></a>
+            <a href="marcar_salida.html"><button class="btn-marcaje"><i class="fas fa-sign-out-alt"></i>Marcar salida</button></a>
+            <a href="marcar_invitado.html"><button class="btn-marcaje"><i class="fas fa-users"></i>Acceso de visitantes</button></a>
         </div>
-    </body>
-
+    </div>
+</body>
 </html>
