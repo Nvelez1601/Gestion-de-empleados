@@ -1,0 +1,405 @@
+/* Estilos base */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1f1c2c, #3a2c4a);
+}
+
+/* Fondo de partículas */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 0;
+}
+
+/* Contenedor principal */
+.opciones-acceso {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 1.5s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+/* Título */
+.opciones-acceso h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor de botones */
+.espaciado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Estilos de los botones */
+.btn-marcaje {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 1.2rem 2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Animaciones de los botones */
+.btn-marcaje::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+.btn-marcaje:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+.btn-marcaje:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.btn-marcaje:active {
+    transform: translateY(0);
+}
+.btn-marcaje i {
+    font-size: 1.2rem;
+}
+
+/* Eliminar subrayado y estilos no deseados en los enlaces */
+.espaciado a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media querys para dar toque responsive a la pagina */
+@media (max-width: 480px) {
+    .opciones-acceso {
+        padding: 2rem;
+    }
+
+    .opciones-acceso h1 {
+        font-size: 2rem;
+    }
+
+    .btn-marcaje {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+
+/* Espacio donde se mostrara la camara */
+#contenedor-camara {
+    display: none; /* Ocultar por defecto */
+    position: relative;
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#mostrar-camara {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---------- ESTILOS DE LA PAGINA DE REGISTRO E INICIO DE SESION ---------- */
+
+.estilo-body-registro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background: linear-gradient(135deg, #1f1c2c, #3a2c4a);
+}
+.contenedor-registro {
+    position: relative;
+    width: 80rem;
+    height: 50rem;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px gray;
+    border: 1px solid gainsboro;
+}
+.contenedor-formulario {
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+}
+.contenedor-formulario form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in;
+}
+.contenedor-formulario h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+.contenedor-formulario span {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+.contenedor-input {
+    width: 30rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #EEEEEE;
+    border-radius: 1rem;
+}
+.contenedor-input input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE;
+}
+.contenedor-formulario a {
+    color: black;
+    font-size: 14px;
+    margin-bottom: 2rem;
+    margin-top: 5px;
+}
+.boton-formulario {
+    width: 17rem;
+    height: 45px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    background-color: #2048d6;
+    color: white;
+}
+
+/* Animaciones para el formulario */
+.formulario-registro {
+    transform: translateX(-100%);
+}
+.contenedor-registro.toggle .formulario-inicio-sesion{
+    transform: translateX(100%);
+}
+.contenedor-registro.toggle .formulario-registro{
+    transform: translateX(0);
+}
+
+/* Estilos seccion de bienvenida y cambio de secciones */
+.contenedor-bienvenida {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #2048d6;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    overflow: hidden;
+}
+.contenedor-registro.toggle .contenedor-bienvenida{
+    transform: translateX(0);
+}
+.contenedor-bienvenida .bienvenida {
+    position: absolute;
+    width: 74.4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 5rem;
+    color: white;
+    transition: transform 0.5s ease-in-out;
+}
+.bienvenida-inicio-sesion {
+    transform: translateX(120%);
+}
+.contenedor-bienvenida h3 {
+    font-size: 4rem;
+}
+.contenedor-bienvenida p {
+    font-size: 14px;
+    text-align: center;
+}
+.contenedor-bienvenida .boton-formulario {
+    border: 2px solid white;
+}
+
+.contenedor-registro.toggle .bienvenida-inicio-sesion{
+    transform: translateX(0);
+}
+.contenedor-registro.toggle .bienvenida-registro{
+    transform: translateX(-100%);
+}
+.logo-sm {
+    position: absolute;
+    top: -140px;
+    width: 200px; 
+    height: auto; 
+    border-radius: 10px; 
+    margin-bottom: 20px;
+}
+
+/* Para pantallas pequeñas, como móviles */
+@media screen and (max-width: 768px) {
+    .contenedor-formulario h2 {
+        font-size: 1.5rem; /* Reducimos el tamaño del encabezado */
+    }
+
+    .contenedor-formulario span {
+        font-size: 10px; /* Texto más pequeño para descripciones */
+    }
+
+    .contenedor-input {
+        width: 90%; /* Aumenta flexibilidad en ancho */
+        padding: 5px; /* Reduce el espacio interno */
+    }
+
+    .contenedor-input input {
+        font-size: 0.9rem; /* Texto más pequeño en los campos */
+    }
+
+    .boton-formulario {
+        width: 70%; /* Ajuste proporcional al contenedor */
+        padding: 8px; /* Reducimos el relleno */
+        font-size: 0.8rem; /* Texto más pequeño en botones */
+    }
+
+    .contenedor-bienvenida h3 {
+        font-size: 2rem; /* Tamaño del texto reducido */
+    }
+
+    .contenedor-bienvenida p {
+        font-size: 12px; /* Texto más pequeño para párrafos */
+    }
+
+    .logo-sm {
+        width: 12%; /* Logo más pequeño */
+        max-width: 100px; /* Aseguramos límites en el tamaño */
+    }
+}
+
+/* Media query para dispositivos tipo tabletas */
+@media screen and (min-width: 769px) and (max-width: 1500px) {
+    /* Contenedor principal con tamaño fijo */
+    .contenedor-registro {
+        width: 800px; /* Tamaño fijo en píxeles */
+        height: 600px; /* Altura fija */
+    }
+
+    /* Formularios con tamaño específico */
+    .contenedor-formulario h2 {
+        font-size: 2rem; /* Tamaño del encabezado estático */
+    }
+
+    .contenedor-formulario span {
+        font-size: 14px; /* Tamaño fijo para texto descriptivo */
+    }
+
+    .contenedor-input {
+        width: 350px; /* Ancho fijo */
+        height: auto; /* Altura automática */
+        padding: 10px; /* Espaciado interno */
+    }
+
+    .contenedor-input input {
+        font-size: 1rem; /* Texto con tamaño fijo */
+    }
+
+    .boton-formulario {
+        width: 200px; /* Ancho fijo */
+        height: 40px; /* Altura fija */
+        padding: 10px; /* Espaciado interno */
+        font-size: 0.9rem; /* Texto con tamaño definido */
+    }
+
+    /* Sección de bienvenida con tamaño fijo */
+    .contenedor-bienvenida {
+        width: 400px; /* Ancho fijo */
+        height: 600px; /* Altura fija para coincidir con el contenedor principal */
+    }
+
+    .contenedor-bienvenida h3 {
+        font-size: 2rem; /* Encabezado estático */
+    }
+
+    .contenedor-bienvenida p {
+        font-size: 14px; /* Texto descriptivo con tamaño fijo */
+    }
+
+    .logo-sm {
+        width: 100px; /* Tamaño fijo del logo */
+        height: auto; /* Mantiene proporción */
+    }
+}
+
+
+
+
+
