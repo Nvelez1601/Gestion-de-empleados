@@ -1,0 +1,135 @@
+<!-- //////////////////////////////////////////////////////////////////////////////// -->
+<!-- /           Código de proyecto control de acceso de empleados                  / -->
+<!-- /           Fecha: 20-03-2025                                                  / -->
+<!-- /           Programadores:                                                     / -->
+<!-- /              * Juan Ruiz                                                     / -->
+<!-- /              * Eder Andrade                                                  / -->
+<!-- /              * Nelson Velez                                                  / -->
+<!-- /              * Abraham Paredes                                               / -->
+<!-- /              * Nelson Velez                                                  / -->
+<!-- /              * Arturo Micaechioni                                            / -->
+<!-- /              * Valentina Landazabal                                          / -->
+<!-- /              * Henry Cely                                                    / -->
+<!-- /              * Fabian Yanes                                                  / -->
+<!-- /           Versión: 0.4.5 (versionado semantico)                              / -->
+<!-- //////////////////////////////////////////////////////////////////////////////// -->
+
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro e inicio de sesión</title>
+
+        <!-- Vinculos de hoja de estilos y normalize -->
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/style.css">
+
+        <!-- Fuentes de la pagina GoogleFonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+        <!-- Vinculo a los archivos JavaScript e IonIcon -->
+        <script src="/js/main.js" defer></script>
+        <script src="/js/efectos.js" defer></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    </head>
+
+    <!-- Cuerpo de la página -->
+    <body class="estilo-body-registro">
+
+        <!-- Fondo de partículas -->
+        <div id="particles-js"></div>
+
+        <!-- Recuadro de opciones -->
+        <div class="contenedor-registro">
+
+            <!-- Formulario inicio de sesion -->
+            <div class="contenedor-formulario">
+
+                <!-- Etiqueta form para abrir seccion del formulario -->
+                <form class="formulario-inicio-sesion">
+                    <h2>Inicio de sesión</h2>
+
+                    <span>Ingrese los datos de su cuenta.</span>
+
+                    <!-- Contenedor email -->
+                    <div class="contenedor-input">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="text" placeholder="Email">
+                    </div>
+
+                    <!-- Contenedor contraseña -->
+                    <div class="contenedor-input">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" placeholder="Contraseña">
+                    </div>
+
+                    <!-- Link para recuperar su contraseña -->
+                    <a href="#">¿Olvidó su contraseña?</a>
+                    <button class="boton-formulario">Iniciar sesión</button>
+                </form>
+            </div>
+
+            <!-- Formulario registro -->
+            <div class="contenedor-formulario">
+                <form class="formulario-registro">
+                    <h2>Registro</h2>
+
+                    <span>Rellene los campos para su registro.</span>
+
+                    <!-- Contenedor nombre -->
+                    <div class="contenedor-input">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+
+                    <!-- Contenedor apellido -->
+                    <div class="contenedor-input">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="text" placeholder="Apellido">
+                    </div>
+
+                    <!-- Contenedor email -->
+                    <div class="contenedor-input">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="text" placeholder="Email">
+                    </div>
+
+                    <!-- Contenedor contraseña -->
+                    <div class="contenedor-input">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" placeholder="Contraseña">
+                    </div>
+
+                    <button class="boton-formulario">Finalizar registro</button>
+                </form>
+            </div>
+            
+            <!-- Seccion de bienvenidas con los distintos botones de cambio de seccion -->
+            <div class="contenedor-bienvenida">
+
+                <!-- Seccion para cambiar de inicio de sesión a registro -->
+                <div class="bienvenida-registro bienvenida">
+                    <img src="/img/santa_maria_logo2.jpg" alt="Logo Santa Maria" class="logo-sm">
+                    <h3>¡Bienvenido!</h3>
+                    <p>Ingrese sus datos para entrar en la plataforma.</p>
+                    <button class="boton-formulario" id="btn-registro">Registrarse</button>
+                </div>
+
+                <!-- Seccion para cambiar de registro a inicio de sesion -->
+                <div class="bienvenida-inicio-sesion bienvenida">
+                    <img src="/img/santa_maria_logo2.jpg" alt="Logo Santa Maria" class="logo-sm">
+                    <h3>¡Hola!</h3>
+                    <p>Regístrese para poder tener acceso a la empresa.</p>
+                    <button class="boton-formulario" id="btn-inicio-sesion">Iniciar sesión</button>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
