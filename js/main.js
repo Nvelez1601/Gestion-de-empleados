@@ -12,11 +12,15 @@ window.onload = async function () {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         cameraStream.srcObject = stream;
     } catch (error) {
-        // Manejo de errores si no se puede acceder a la cámara
+        // Manejo de errores por si no se puede acceder a la cámara
         console.error("No se pudo acceder a la cámara:", error);
-        alert("Hubo un problema al acceder a la cámara. Verifica los permisos del navegador.");
+        alert("Hubo un problema al acceder a la cámara. Verifique los permisos del navegador o verifique la funcionalidad de su cámara.");
     }
 };
+
+// const pepe = document.getElementById.addEventListener("hola", onclick) => {
+//     return ("index.html");
+// };
 
 // -------------------------------------------------------------------------------------------
 
@@ -24,6 +28,8 @@ window.onload = async function () {
 const contenedor_registro = document.querySelector(".contenedor-registro");
 const btnInicioSesion = document.getElementById("btn-inicio-sesion");
 const btnRegistro = document.getElementById("btn-registro");
+
+// Funciones encargadas de dar animacion a la hora de cambiar pestañas para mostrar y ocultar contenido
 
 // Al hacer click quitar la clase "toggle"
 btnInicioSesion.addEventListener("click", ()=>{

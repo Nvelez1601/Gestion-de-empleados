@@ -1,6 +1,6 @@
 /* Estilos base */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Fuente utilizada en la pagina */
     margin: 0;
     padding: 0;
     display: flex;
@@ -305,6 +305,10 @@ body {
     border-radius: 10px; 
     margin-bottom: 20px;
 }
+.logo-usm-png {
+    width: 150px;
+    height: auto;
+}
 
 /* Para pantallas pequeñas, como móviles */
 @media screen and (max-width: 768px) {
@@ -393,7 +397,12 @@ body {
         font-size: 14px; /* Texto descriptivo con tamaño fijo */
     }
 
+    .contenedor-bienvenida .bienvenida {
+        width: 60%;
+    }
+
     .logo-sm {
+        top: -100px;
         width: 100px; /* Tamaño fijo del logo */
         height: auto; /* Mantiene proporción */
     }
