@@ -11,6 +11,18 @@ body {
     overflow: hidden;
     background: linear-gradient(135deg, #1f1c2c, #3a2c4a);
 }
+.body-index {
+    font-family: 'Poppins', sans-serif; /* Fuente utilizada en la pagina */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1f1c2c, #3a2c4a);
+}
 
 /* Fondo de partículas */
 #particles-js {
@@ -162,7 +174,19 @@ body {
     object-fit: cover;
 }
 
-/* ---------- ESTILOS DE LA PAGINA DE REGISTRO E INICIO DE SESION ---------- */
+/* Estilos icono de volver */
+.icono-volver {
+    position: absolute; /* Posicionarlo de manera absoluta */
+    top: 1rem; /* Ajusta según sea necesario */
+    left: 1rem; /* Ajusta según sea necesario */
+    font-size: 3rem; /* Aumenta el tamaño del icono */
+    color: #fff; /* Color del icono */
+    z-index: 2; /* Asegúrate de que esté por encima de otros elementos */
+}
+.icono-volver a {
+    color: white;
+}
+/* ---------- ESTILOS DE LA PAGINA DE REGISTRO DE EMPLEADOS ---------- */
 
 .estilo-body-registro {
     display: flex;
@@ -185,6 +209,7 @@ body {
     width: 100%;
     overflow: hidden;
     background-color: white;
+    color: black;
 }
 .contenedor-formulario form {
     height: 100%;
@@ -226,6 +251,7 @@ body {
     font-size: 14px;
     margin-bottom: 2rem;
     margin-top: 5px;
+    text-decoration: none;
 }
 .boton-formulario {
     width: 17rem;
@@ -237,6 +263,13 @@ body {
     margin-top: 1rem;
     background-color: #2048d6;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.boton-formulario ion-icon {
+    font-size: 1.5rem; /* Aumenta el tamaño del icono */
 }
 
 /* Animaciones para el formulario */
@@ -308,6 +341,7 @@ body {
 .logo-usm-png {
     width: 150px;
     height: auto;
+    text-align: center;
 }
 
 /* Para pantallas pequeñas, como móviles */
@@ -408,7 +442,107 @@ body {
     }
 }
 
+/* ---------- ESTILOS DE LA PAGINA DE INICIO DE SESION, RECUPERAR CONTRASEÑA Y CONFIRMAR MARCAJE ---------- */
 
-
-
-
+.formulario-inicio-sesion-admin {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    height: 40rem;
+    background: white;
+    border-radius: 3rem;
+    color: black;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInAdmin 1.5s ease-in-out;
+}
+@keyframes fadeInAdmin {
+    0% {
+        opacity: 0; /* Comienza totalmente transparente */
+        transform: translate(-50%, -60%); /* Comienza un poco más arriba */
+    }
+    100% {
+        opacity: 1; /* Termina completamente visible */
+        transform: translate(-50%, -50%); /* Termina centrado */
+    }
+}
+.formulario-inicio-sesion-admin h1 {
+    text-align: center;
+    padding: 1.5rem 0 2rem 0;
+    border-bottom: 1px solid silver;
+}
+.formulario-inicio-sesion-admin p {
+    text-align: center;
+    font-size: 1.8rem;
+}
+.formulario-inicio-sesion-admin form {
+    padding: 0 4rem;
+    box-sizing: border-box;
+}
+form .usuario-admin {
+    width: 30rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #EEEEEE;
+    border-radius: 1rem;
+}
+.usuario-admin input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE;
+}
+.recuperar-contraseña {
+    margin: 20px 0 20px 5px;
+    cursor: pointer;
+}
+input[type="submit"]{
+    width: 100%;
+    height: 3rem;
+    border: none;
+    background: #2048d6;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: 0.5s;
+}
+input[type="submit"]:hover {
+    background: #4167ec;
+    transition: 0.5s;
+}
+.volver-index {
+    margin: 3rem 0;
+    text-align: center;
+    font-size: 18px;
+    color: black;
+}
+.volver-index a {
+    color: black;
+    text-decoration: none;
+}
+.volver-index a:hover {
+    text-decoration: underline;
+}
+.contenedor-img-png {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.recuperar-contraseña a {
+    text-decoration: none;
+    color: black;
+}
+.recuperar-contraseña a:hover {
+    text-decoration: underline;
+}

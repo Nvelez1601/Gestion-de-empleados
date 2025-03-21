@@ -1,6 +1,6 @@
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 <!-- /           Código de proyecto control de acceso de empleados                  / -->
-<!-- /           Fecha: 20-03-2025                                                  / -->
+<!-- /           Fecha: 25-03-2025                                                  / -->
 <!-- /           Programadores:                                                     / -->
 <!-- /              * Juan Ruiz                                                     / -->
 <!-- /              * Eder Andrade                                                  / -->
@@ -11,7 +11,7 @@
 <!-- /              * Henry Cely                                                    / -->
 <!-- /              * Diego Parra                                                   / -->
 <!-- /              * Fabian Yanes                                                  / -->
-<!-- /           Versión: 0.4.7 (versionado semantico)                              / -->
+<!-- /           Versión: 0.6.10 (versionado semantico)                             / -->
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
     </head>
 
     <!-- Cuerpo de la página -->
-    <body class="estilo-body-registro">
+    <body>
 
         <!-- Fondo de partículas -->
         <div id="particles-js"></div>
@@ -60,18 +60,18 @@
                     <!-- Contenedor email -->
                     <div class="contenedor-input">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" placeholder="Email">
+                        <input type="text" placeholder="Email" required>
                     </div>
 
                     <!-- Contenedor contraseña -->
                     <div class="contenedor-input">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" placeholder="Contraseña">
+                        <input type="password" placeholder="Contraseña" required>
                     </div>
 
                     <!-- Link para recuperar su contraseña -->
                     <a href="#">¿Olvidó su contraseña?</a>
-                    <a href="index.html"><button class="boton-formulario">Iniciar sesión</button></a>
+                    <a href="#"><button class="boton-formulario">Iniciar sesión</button></a>
                     
                 </form>
             </div>
@@ -81,32 +81,32 @@
                 <form class="formulario-registro">
                     <h2>Registro</h2>
 
-                    <span>Rellene los campos para su registro.</span>
+                    <span>Rellene los campos para registrar al empleado.</span>
 
                     <!-- Contenedor nombre -->
                     <div class="contenedor-input">
                         <ion-icon name="person-outline"></ion-icon>
-                        <input type="text" placeholder="Nombre">
+                        <input type="text" placeholder="Nombre" required required maxlength="25">
                     </div>
 
                     <!-- Contenedor apellido -->
                     <div class="contenedor-input">
                         <ion-icon name="person-outline"></ion-icon>
-                        <input type="text" placeholder="Apellido">
+                        <input type="text" placeholder="Apellido" required required maxlength="25">
                     </div>
 
                     <!-- Contenedor email -->
                     <div class="contenedor-input">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" placeholder="Email">
+                        <input type="email" placeholder="Email" required required maxlength="30">
                     </div>
 
                     <!-- Contenedor contraseña -->
                     <div class="contenedor-input">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" placeholder="Contraseña">
+                        <input type="password" placeholder="Contraseña" required required maxlength="25">
                     </div>
-                    <a href="index.html"><button class="boton-formulario">Finalizar registro</button></a>
+                    <a href="#"><button class="boton-formulario">Finalizar registro</button></a>
                     
                 </form>
             </div>
@@ -117,17 +117,17 @@
                 <!-- Seccion para cambiar de inicio de sesión a registro -->
                 <div class="bienvenida-registro bienvenida">
                     <img src="/img/santa_maria_logo2.jpg" alt="Logo Santa Maria" class="logo-sm">
-                    <h3>¡Bienvenido!</h3>
-                    <p>Ingrese sus datos para entrar en la plataforma.</p>
-                    <button class="boton-formulario" id="btn-registro">Registrarse</button>
+                    <h3>¡Hola, administrador/a!</h3>
+                    <button class="boton-formulario" id="btn-registro">Registrar<ion-icon name="arrow-forward-outline"></ion-icon></button>
+                    <button class="boton-formulario" id="btn-registro">Cerrar sesión<ion-icon name="log-out-outline"></ion-icon></button>
                 </div>
 
                 <!-- Seccion para cambiar de registro a inicio de sesion -->
                 <div class="bienvenida-inicio-sesion bienvenida">
                     <img src="/img/santa_maria_logo2.jpg" alt="Logo Santa Maria" class="logo-sm">
-                    <h3>¡Hola!</h3>
-                    <p>Ingrese los datos del empleado a registrar.</p>
-                    <button class="boton-formulario" id="btn-inicio-sesion">Iniciar sesión</button>
+                    <h3>¡Hola, administrador/a!</h3>
+                    <button class="boton-formulario" id="btn-inicio-sesion"><ion-icon name="arrow-back-outline"></ion-icon>Historial de acceso</button>
+                    <button class="boton-formulario" id="btn-inicio-sesion"><ion-icon name="log-out-outline"></ion-icon>Cerrar sesión</button>
                 </div>
             </div>
         </div>

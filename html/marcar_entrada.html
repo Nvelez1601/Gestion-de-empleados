@@ -1,6 +1,6 @@
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 <!-- /           Código de proyecto control de acceso de empleados                  / -->
-<!-- /           Fecha: 20-03-2025                                                  / -->
+<!-- /           Fecha: 25-03-2025                                                  / -->
 <!-- /           Programadores:                                                     / -->
 <!-- /              * Juan Ruiz                                                     / -->
 <!-- /              * Eder Andrade                                                  / -->
@@ -11,7 +11,7 @@
 <!-- /              * Henry Cely                                                    / -->
 <!-- /              * Diego Parra                                                   / -->
 <!-- /              * Fabian Yanes                                                  / -->
-<!-- /           Versión: 0.4.7 (versionado semantico)                              / -->
+<!-- /           Versión: 0.6.10 (versionado semantico)                             / -->
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 
 <!DOCTYPE html>
@@ -29,11 +29,13 @@
         <!-- Fuentes de la pagina GoogleFonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
         <!-- Vinculo a los archivos JavaScript -->
         <script src="/js/main.js" defer></script>
         <script src="/js/efectos.js" defer></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     </head>
 
@@ -45,6 +47,11 @@
     
         <!-- Recuadro de opciones -->
         <div class="opciones-acceso">
+
+            <!-- Icono de volver -->
+            <div class="icono-volver">
+                <a href="index.html"><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+            </div>
             
             <img src="/img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
 

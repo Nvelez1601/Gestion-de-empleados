@@ -1,6 +1,6 @@
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 <!-- /           Código de proyecto control de acceso de empleados                  / -->
-<!-- /           Fecha: 20-03-2025                                                  / -->
+<!-- /           Fecha: 25-03-2025                                                  / -->
 <!-- /           Programadores:                                                     / -->
 <!-- /              * Juan Ruiz                                                     / -->
 <!-- /              * Eder Andrade                                                  / -->
@@ -11,7 +11,7 @@
 <!-- /              * Henry Cely                                                    / -->
 <!-- /              * Diego Parra                                                   / -->
 <!-- /              * Fabian Yanes                                                  / -->
-<!-- /           Versión: 0.4.7 (versionado semantico)                              / -->
+<!-- /           Versión: 0.6.10 (versionado semantico)                             / -->
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 
 <!DOCTYPE html>
@@ -33,8 +33,10 @@
 
     <!-- Vinculos de JS -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="/js/efectos.js" defer></script>
-    <script src="/js/efectos.js" defer></script>
+    <script src="/js/main.js" defer></script>
 </head>
 
 <!-- Cuerpo principal de la pagina -->
@@ -45,14 +47,18 @@
 
     <!-- Contenedor principal -->
     <div class="opciones-acceso">
+
+        <!-- Logo USM -->
         <img src="/img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
         <h1>Control de acceso de empleados</h1>
+
+        <!-- Contenedor de las distintas opciones para marcar -->
         <div class="espaciado">
             <a href="marcar_entrada.html"><button class="btn-marcaje"><i class="fas fa-sign-in-alt"></i>Marcar entrada</button></a>
             <a href="marcar_salida.html"><button class="btn-marcaje"><i class="fas fa-sign-out-alt"></i>Marcar salida</button></a>
             <a href="marcar_invitado.html"><button class="btn-marcaje"><i class="fas fa-users"></i>Acceso de visitantes</button></a>
 
-            <!-- Link para recuperar su contraseña -->
+            <!-- Link para ir al inicio de sesion de administradores -->
             <a href="acceder_administrador.html">Acceso de administradores</a>
         </div>
     </div>
