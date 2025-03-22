@@ -24,8 +24,8 @@
     <title>Control de acceso de empleados</title>
 
     <!-- Vinculos de APIS de fuentes y hojas de estilos -->
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,8 +35,8 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="/js/efectos.js" defer></script>
-    <script src="/js/main.js" defer></script>
+    <script src="../js/efectos.js" defer></script>
+    <script src="../js/main.js" defer></script>
 </head>
 
 <!-- Cuerpo principal de la pagina -->
@@ -50,30 +50,30 @@
 
         <h1>Acceso de administradores</h1>
 
-        <form method="post" action="">
+        <form method="post" action="../php/login_admin.php">
             
             <!-- Logo USM -->
             <div class="contenedor-img-png">
-                <img src="/img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
+                <img src="../img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
             </div>
 
             <!-- Contenedor para input de correo -->
             <div class="usuario-admin">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <input type="email" placeholder="Correo electrónico" required maxlength="30">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="text" name="usuario_admin" placeholder="usuario" required maxlength="10">  <!-- type = email; maxlength = 30-->
             </div>
 
             <!-- Contenedor para input de contraseña -->
             <div class="usuario-admin">
-                <ion-icon name="mail-outline"></ion-icon>
-                <input type="password" placeholder="Contraseña" required required maxlength="25">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <input type="password" name="contrasena" placeholder="Contraseña" required required maxlength="25">
             </div>
 
             <!-- Link para recuperar contraseña -->
             <div class="recuperar-contraseña"><a href="recuperar-contraseña-admin.html">Olvidé mi contraseña</a></div>
 
             <!-- Boton para ingresar -->
-            <input type="submit" value="Ingresar">
+            <input type="submit" name="btn_inicio_admin" value="Ingresar">
             
             <!-- Contenedor para volver al apartado de escaneo QR -->
             <div class="volver-index">
