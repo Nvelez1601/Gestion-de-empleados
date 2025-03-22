@@ -18,10 +18,6 @@ window.onload = async function () {
     }
 };
 
-// const pepe = document.getElementById.addEventListener("hola", onclick) => {
-//     return ("index.html");
-// };
-
 // -------------------------------------------------------------------------------------------
 
 // Eventos para aplicar transiciones en los distintos formularios (COMENTAR TODO CTRL + K + C ; DESCOMENTAR CTRL + K + U)
@@ -39,3 +35,5 @@ btnInicioSesion.addEventListener("click", ()=>{
 btnRegistro.addEventListener("click", ()=>{
     contenedor_registro.classList.add("toggle");
 });
+
+// -------------------------------------------------------------------------------------------

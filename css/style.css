@@ -57,6 +57,12 @@ body {
     font-weight: 700;
     text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
+.opciones-acceso p {
+    margin-bottom: 1rem;
+}
+.opciones-acceso .usuario-admin ion-icon {
+    color: black;
+}
 
 /* Contenedor de botones */
 .espaciado {
@@ -186,6 +192,13 @@ body {
 .icono-volver a {
     color: white;
 }
+.reloj {
+    font-size: 1.4rem; /* Tamaño de la fuente */
+    margin-bottom: 5px; /* Espacio entre el reloj y el logo */
+    color: #fff; /* Color del texto */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para mejorar la legibilidad */
+}
+
 /* ---------- ESTILOS DE LA PAGINA DE REGISTRO DE EMPLEADOS ---------- */
 
 .estilo-body-registro {
