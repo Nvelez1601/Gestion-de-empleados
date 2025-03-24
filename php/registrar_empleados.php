@@ -42,7 +42,7 @@
 			$contrasena = password_hash(trim($_POST['contrasena']), PASSWORD_DEFAULT); // encriptar contraseña
 			$fechareg = date("Y-m-d");
 
-			$consulta = "INSERT INTO login_db (id, nombre, contrasena, usuario, correo, fecha_reg)
+			$consulta = "INSERT INTO login_db (id, nombre, contrasena, apellido, correo, fecha_reg)
 						VALUES ('$id','$nombre','$contrasena','$usuario','$correo','$fechareg')";
 
 			$resultado = mysqli_query($conexion, $consulta);
