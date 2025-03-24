@@ -1,0 +1,74 @@
+<!-- //////////////////////////////////////////////////////////////////////////////// -->
+<!-- /           Código de proyecto control de acceso de empleados                  / -->
+<!-- /           Fecha: 25-03-2025                                                  / -->
+<!-- /           Programadores:                                                     / -->
+<!-- /              * Juan Ruiz                                                     / -->
+<!-- /              * Eder Andrade                                                  / -->
+<!-- /              * Nelson Velez                                                  / -->
+<!-- /              * Abraham Paredes                                               / -->
+<!-- /              * Arturo Micaechioni                                            / -->
+<!-- /              * Valentina Landazabal                                          / -->
+<!-- /              * Henry Cely                                                    / -->
+<!-- /              * Diego Parra                                                   / -->
+<!-- /              * Fabian Yanes                                                  / -->
+<!-- /           Versión: 0.6.10 (versionado semantico)                             / -->
+<!-- //////////////////////////////////////////////////////////////////////////////// -->
+
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Escaneo de salida</title>
+
+        <!-- Vinculos de hoja de estilos y normalize -->
+        <link rel="stylesheet" href="../css/normalize.css">
+        <link rel="stylesheet" href="../css/style.css">
+
+        <!-- Fuentes de la pagina GoogleFonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+        <!-- Vinculo a los archivos JavaScript -->
+        <script src="../js/main.js" defer></script>
+        <script src="../js/efectos.js" defer></script>
+        <script src="../js/reloj.js" defer></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    </head>
+
+    <!-- Cuerpo de la página -->
+    <body>
+
+        <!-- Fondo de partículas -->
+        <div id="particles-js"></div>
+
+        <!-- Recuadro de opciones -->
+        <div class="opciones-acceso">
+            
+            <!-- Icono de volver -->
+            <div class="icono-volver">
+                <a href="index.html"><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+            </div>
+
+            <!-- Mostrar fecha y hora actual de forma dinámica -->
+            <div id="reloj" class="reloj"></div>
+
+            <img src="../img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
+            
+            <h1>Marcar salida</h1>
+
+            <!-- Contenedor para la cámara que leerá los QR -->
+            <div id="contenedor-camara">
+                <video id="mostrar-camara" autoplay playsinline></video>
+            </div>
+
+            <p>Acerque a la cámara el código QR que se encuentra en su credencial de empleado.</p>
+            
+        </div>
+    </body>
+
+</html>
