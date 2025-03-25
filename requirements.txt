@@ -1,3 +1,6 @@
 Flask==2.3.2              # Framework para manejar las rutas y plantillas
 qrcode[pil]==7.4.2        # Librería para generar códigos QR
 smtplib                   # Librería estándar de Python para enviar correos (no necesita instalación)
+Pillow==8.4.0             # Librería para manejar imágenes
+Flask-Mail==0.9.1         # Extensión para enviar correos desde Flask
+Flask cors==3.0.10        # Extensión para manejar CORS en Flask
