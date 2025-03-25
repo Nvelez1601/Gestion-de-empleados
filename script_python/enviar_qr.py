@@ -1,93 +1,89 @@
-import sys
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import qrcode
+import base64
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import smtplib
-import os
 
-def generar_qr(nombre_invitado, correo_invitado):
-    """
-    Genera un código QR con el nombre y correo del invitado.
-    """
-    contenido_qr = f"Nombre: {nombre_invitado}\nCorreo: {correo_invitado}"
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    qr.add_data(contenido_qr)
-    qr.make(fit=True)
+app = Flask(__name__)
+CORS(app)  # Permitir solicitudes desde el frontend
 
-    # Guardar el QR como imagen
-    nombre_archivo = f"qr_{nombre_invitado.replace(' ', '_')}.png"
-    qr_img = qr.make_image(fill_color="black", back_color="white")
-    qr_img.save(nombre_archivo)
-    return nombre_archivo
-
-def enviar_correo(receiver_email, subject, message, qr_file_path):
-    """
-    Envía un correo electrónico con un archivo adjunto (código QR).
-    """
-    email_sender = "nvelezcuauro@gmail.com"  # Reemplaza con tu email
-    email_password = "rrwc ejnm jqme jepl"  # Usa una contraseña de aplicación
-    smtp_server = "smtp.gmail.com"
-    smtp_port = 587
-
+# Ruta para recibir los datos y enviar el correo
+@app.route('/enviar_qr', methods=['POST'])
+def enviar_qr():
     try:
-        # Crear el mensaje de correo
+        data = request.json
+        print("Datos recibidos:", data)  # Log para verificar los datos
+
+        nombre = data.get('nombre')
+        correo = data.get('correo')
+
+        if not nombre or not correo:
+            print("Faltan datos")  # Log para datos faltantes
+            return jsonify({'error': 'Faltan datos'}), 400
+
+        # Generar el código QR
+        contenido_qr = f"Nombre: {nombre}\nCorreo: {correo}"
+        print("Contenido del QR:", contenido_qr)  # Log para el contenido del QR
+
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(contenido_qr)
+        qr.make(fit=True)
+
+        qr_filename = f"qr_{nombre.replace(' ', '_')}.png"
+        qr_img = qr.make_image(fill_color="black", back_color="white")
+        qr_img.save(qr_filename)
+        print("QR guardado como:", qr_filename)  # Log para el archivo QR
+
+        # Configurar el correo
+        email_sender = "nvelezcuauro@gmail.com"
+        email_password = "rrwc ejnm jqme jepl"
+        smtp_server = "smtp.gmail.com"
+        smtp_port = 587
+
         msg = MIMEMultipart()
         msg["From"] = email_sender
-        msg["To"] = receiver_email
-        msg["Subject"] = subject
+        msg["To"] = correo
+        msg["Subject"] = "Código QR para acceso de invitado"
+        msg.attach(MIMEText(f"Hola {nombre}, este es tu código QR para acceder.", "plain"))
 
-        # Agregar el cuerpo del mensaje
-        msg.attach(MIMEText(message, "html", "utf-8"))
-
-        # Verificar si el archivo QR existe
-        if not os.path.exists(qr_file_path):
-            raise FileNotFoundError(f"El archivo QR {qr_file_path} no se encontró.")
-
-        # Adjuntar el archivo QR
-        with open(qr_file_path, "rb") as attachment:
+        with open(qr_filename, "rb") as attachment:
             part = MIMEBase("application", "octet-stream")
             part.set_payload(attachment.read())
         encoders.encode_base64(part)
         part.add_header(
             "Content-Disposition",
-            f"attachment; filename={os.path.basename(qr_file_path)}",
+            f"attachment; filename={qr_filename}",
         )
         msg.attach(part)
 
-        # Conectar al servidor SMTP y enviar el correo
+        print("Correo configurado correctamente")  # Log para configuración del correo
+
+        # Enviar el correo
         smtp_conn = smtplib.SMTP(smtp_server, smtp_port)
         smtp_conn.starttls()
         smtp_conn.login(email_sender, email_password)
-        smtp_conn.sendmail(email_sender, receiver_email, msg.as_string())
+        smtp_conn.sendmail(email_sender, correo, msg.as_string())
         smtp_conn.quit()
+        print("Correo enviado a:", correo)  # Log para el envío del correo
 
-        print(f"Correo enviado a {receiver_email} correctamente.")
-    except (smtplib.SMTPException, FileNotFoundError, OSError) as e:
-        print(f"Error al enviar el correo: {e}")
+        # Eliminar el archivo QR después de enviarlo
+        os.remove(qr_filename)
+        print("Archivo QR eliminado")  # Log para la eliminación del archivo
 
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Uso: python enviar_qr.py <correo> <nombre>")
-        sys.exit(1)
+        return jsonify({'message': 'Correo enviado correctamente'}), 200
+    except Exception as e:
+        print("Error:", str(e))  # Log para el error
+        return jsonify({'error': str(e)}), 500
 
-    correo = sys.argv[1]
-    nombre = sys.argv[2]
-
-    # Generar el QR
-    qr_path = generar_qr(nombre, correo)
-
-    # Enviar el correo con el QR adjunto
-    asunto = "Código QR para acceso de invitado"
-    mensaje = f"<p>Hola {nombre},</p><p>Este es tu código QR para acceder a las instalaciones.</p>"
-    enviar_correo(correo, asunto, mensaje, qr_path)
-
-    # Eliminar el archivo QR después de enviarlo
-    if os.path.exists(qr_path):
-        os.remove(qr_path)
+if __name__ == '__main__':
+    app.run(debug=True)

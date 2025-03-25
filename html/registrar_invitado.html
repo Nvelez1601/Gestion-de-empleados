@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Invitado</title>
 
-    <!-- Vinculos de estilos -->
+    <!-- Estilos -->
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- Vinculos de JS -->
-    <script src="../js/efectos.js" defer></script>
-    <script src="../js/main.js" defer></script>
+    <!-- Librería QRCode.js -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -26,9 +25,8 @@
     <div class="formulario-inicio-sesion-admin fadein-admin">
         <h1>Registrar nuevo invitado</h1>
 
-        <form method="post" action="php/enviar_qr_invitado.php">
-            
-            <!-- Logo USM -->
+        <form id="form-invitado">
+            <!-- Logo -->
             <div class="contenedor-img-png">
                 <img src="../img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
             </div>
@@ -38,23 +36,62 @@
             <!-- Campo para el nombre del invitado -->
             <div class="usuario-admin">
                 <ion-icon name="person-outline"></ion-icon>
-                <input type="text" name="nombre_invitado" placeholder="Nombre del invitado" required maxlength="50">
+                <input type="text" name="nombre_invitado" id="nombre_invitado" placeholder="Nombre del invitado" required maxlength="50">
             </div>
 
             <!-- Campo para el correo del invitado -->
             <div class="usuario-admin">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="email" name="correo_invitado" placeholder="Correo electrónico" required maxlength="50">
+                <input type="email" name="correo_invitado" id="correo_invitado" placeholder="Correo electrónico" required maxlength="50">
             </div>
 
             <!-- Botón para enviar -->
             <input type="submit" value="Enviar QR">
-            
+
             <!-- Botón para volver -->
             <div class="volver-index">
                 <a href="marcar_invitado.html">Volver</a>
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('form-invitado').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre_invitado').value;
+            const correo = document.getElementById('correo_invitado').value;
+
+            if (!nombre || !correo) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            console.log("Datos enviados:", { nombre, correo });
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/enviar_qr', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nombre, correo }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("Error del backend:", errorData);
+                    alert(`Error al enviar el correo: ${errorData.error}`);
+                    return;
+                }
+
+                const result = await response.json();
+                console.log("Respuesta del backend:", result);
+                alert("El correo con el código QR se ha enviado correctamente.");
+            } catch (error) {
+                console.error("Error inesperado:", error);
+            }
+        });
+    </script>
 </body>
 </html>
