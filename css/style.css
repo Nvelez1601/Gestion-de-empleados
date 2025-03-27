@@ -1,27 +1,37 @@
 /* Estilos base */
 body {
-    font-family: 'Poppins', sans-serif; /* Fuente utilizada en la pagina */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #fff;
+    color: #FFFFFF; /* Texto en blanco para mayor contraste */
     overflow: hidden;
-    background: linear-gradient(135deg, #1f1c2c, #3a2c4a);
-}
-.body-index {
-    font-family: 'Poppins', sans-serif; /* Fuente utilizada en la pagina */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #fff;
-    overflow: hidden;
-    background: linear-gradient(135deg, #1f1c2c, #3a2c4a);
+    background: linear-gradient(135deg,  
+        #B0C4DE 10%,  /* Azul claro presente desde los bordes */
+        #1C314A 25%,  /* Azul grisáceo */
+        #0A1B33 40%,  /* Azul oscuro para contraste */
+        #87A9D6 55%,  /* Azul medio en el centro */
+        #B0C4DE 70%,  /* Azul claro vuelve a aparecer */
+        #4977A5 85%,  /* Azul intenso */
+        #B0C4DE 95%   /* Azul claro en los extremos */
+    ),
+    linear-gradient(120deg,  
+        rgba(176, 196, 222, 0.9) 15%,  /* Azul claro en más proporción */
+        rgba(100, 140, 180, 0.8) 35%,  
+        rgba(20, 40, 60, 0.7) 60%,  
+        rgba(176, 196, 222, 0.9) 85%   /* Azul claro reaparece */
+    ),
+    linear-gradient(60deg,  
+        #B0C4DE 10%,  
+        #1C314A 40%,  
+        #0A1B33 70%,  
+        #B0C4DE 90%  
+    );
+    background-blend-mode: overlay, multiply, soft-light;
+    background-attachment: fixed;
 }
 
 /* Fondo de partículas */
@@ -33,15 +43,16 @@ body {
     z-index: 0;
 }
 
+/* Contenedor principal */
 .opciones-acceso {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 2rem;
+    border-radius: 30px;
+    padding: 3rem;
     text-align: center;
-    max-width: 650px;
-    width: 90%;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
     animation: fadeIn 1.5s ease-in-out;
     position: relative;
@@ -273,7 +284,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 1rem;
-    background-color: #2048d6;
+    background-color: #4169E1;
     color: white;
     display: flex;
     align-items: center;
@@ -302,11 +313,33 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    background-color: #2048d6;
+    background: linear-gradient(135deg,  
+        #1C314A 5%,   /* Azul grisáceo profundo */
+        #B0C4DE 20%,  /* Azul claro con más presencia */
+        #0A1B33 40%,  /* Azul oscuro para contraste */
+        #87A9D6 55%,  /* Azul medio fundiéndose con el oscuro */
+        #1C314A 65%,  /* Reaparece azul grisáceo */
+        #B0C4DE 80%,  /* Azul claro en transiciones */
+        #4977A5 95%   /* Azul intenso en los extremos */
+    ),
+    radial-gradient(circle at 30% 70%,  
+        rgba(176, 196, 222, 0.8) 10%,  
+        rgba(20, 40, 60, 0.7) 50%,  
+        rgba(100, 140, 180, 0.8) 90%  
+    ),
+    linear-gradient(60deg,  
+        #B0C4DE 15%,  
+        #1C314A 35%,  
+        #0A1B33 55%,  
+        #B0C4DE 85%  
+    );
+    background-blend-mode: overlay, multiply, soft-light;
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out;
     overflow: hidden;
 }
+
+
 .contenedor-registro.toggle .contenedor-bienvenida{
     transform: translateX(0);
 }
@@ -345,13 +378,13 @@ body {
 .logo-sm {
     position: absolute;
     top: -140px;
-    width: 200px; 
+    width: 300px; 
     height: auto; 
     border-radius: 10px; 
     margin-bottom: 20px;
 }
 .logo-usm-png {
-    width: 150px;
+    width: 250px;
     height: auto;
     text-align: center;
 }
@@ -520,7 +553,7 @@ input[type="submit"]{
     width: 100%;
     height: 3rem;
     border: none;
-    background: #2048d6;
+    background: #4169E1;
     border-radius: 5px;
     font-size: 18px;
     font-weight: 600;
@@ -530,11 +563,11 @@ input[type="submit"]{
     transition: 0.5s;
 }
 input[type="submit"]:hover {
-    background: #4167ec;
+    background: #4169E1;
     transition: 0.5s;
 }
 .volver-index {
-    margin: 3rem 0;
+    margin: 1rem 0;
     text-align: center;
     font-size: 18px;
     color: black;
@@ -557,4 +590,90 @@ input[type="submit"]:hover {
 }
 .recuperar-contraseña a:hover {
     text-decoration: underline;
+}
+
+/* ---------- ESTILOS DE LA PAGINA DE REGISTRO DE INVITADO ---------- */
+
+.formulario-registrar-invitado {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    height: 42rem;
+    color: black;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInAdmin 1.5s ease-in-out;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+}
+@keyframes fadeInAdmin {
+    0% {
+        opacity: 0; /* Comienza totalmente transparente */
+        transform: translate(-50%, -60%); /* Comienza un poco más arriba */
+    }
+    100% {
+        opacity: 1; /* Termina completamente visible */
+        transform: translate(-50%, -50%); /* Termina centrado */
+    }
+}
+.formulario-registrar-invitado h1 {
+    text-align: center;
+    padding: 1.5rem 0 2rem 0;
+    color: white;
+}
+.formulario-registrar-invitado p {
+    text-align: center;
+    font-size: 1.8rem;
+    color: white;
+}
+.formulario-registrar-invitado form {
+    padding: 0 4rem;
+    box-sizing: border-box;
+}
+form .usuario-admin {
+    width: 30rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #EEEEEE;
+    border-radius: 1rem;
+}
+.usuario-admin input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE;
+}
+input[type="submit"]{
+    width: 100%;
+    height: 3rem;
+    border: none;
+    background: #2048d6;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: 0.5s;
+}
+input[type="submit"]:hover {
+    background: #4167ec;
+    transition: 0.5s;
+}
+.formulario-registrar-invitado ion-icon {
+    font-size: 3rem; /* Aumenta el tamaño del icono */
+    color: white;
+}
+.formulario-registrar-invitado .usuario-admin ion-icon {
+    font-size: 1.5rem; /* Aumenta el tamaño del icono */
+    color: black;
 }

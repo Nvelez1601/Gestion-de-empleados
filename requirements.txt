@@ -1,3 +1,5 @@
+# Instalar todo en el terminal: "pip install -r requirements.txt"
+
 Flask==2.3.2              # Framework para manejar las rutas y plantillas
 qrcode[pil]==7.4.2        # Librería para generar códigos QR
 smtplib                   # Librería estándar de Python para enviar correos (no necesita instalación)

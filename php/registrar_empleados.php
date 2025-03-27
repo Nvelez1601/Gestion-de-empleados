@@ -1,4 +1,4 @@
-<?php 
+<?php	
 
 	include("conex_db.php");  // conectar la base de datos
 
@@ -10,8 +10,8 @@
 			!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
 
 				function generarID() {                      // funcion para generar la ID aleatoria
-					$letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-					$numeros = '0123456789';
+					$letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Letras aleatorias
+					$numeros = '0123456789'; // Numero aleatorios
 					
 					// Generar 3 letras aleatorias
 					$letrasAleatorias = '';
@@ -34,25 +34,28 @@
 					return $idAleatoria;
 				}
 				
-				$id = generarID();				
+				$id = generarID();	// Llamamos a la funcion y guardamos el string en la variable ID			
 
-			$nombre = trim($_POST['nombre']);
+			// Inicializamos las variables para recibir datos
+			$nombre = trim($_POST['nombre']); 
 			$correo = trim($_POST['correo']);
 			$usuario = trim($_POST['usuario']);
 			$contrasena = password_hash(trim($_POST['contrasena']), PASSWORD_DEFAULT); // encriptar contraseña
 			$fechareg = date("Y-m-d");
 
-			$consulta = "INSERT INTO login_db (id, nombre, contrasena, apellido, correo, fecha_reg)
+			// Consultamos en la base de datos
+			$consulta = "INSERT INTO login_db (id, nombre, contrasena, usuario, correo, fecha_reg)
 						VALUES ('$id','$nombre','$contrasena','$usuario','$correo','$fechareg')";
 
 			$resultado = mysqli_query($conexion, $consulta);
 
 			if ($resultado) {
-				$mensaje = "<h3 class='ok'>Te registraste correctamente</h3>";
+				// $mensaje = "<h3 class='ok'>Te registraste correctamente</h3>";
 				
-				// redirección a la misma pagina para evitar el reenvio de datos
+				// codigo para crear el QR
+				
 				header("Location: ../html/registro_inicio_sesion.html");
-				exit;  // Asegura que no se ejecute el codigo siguiente
+				exit;
 			} else {
 				$mensaje = "<h3 class='bad'>Ocurrió un error: " . mysqli_error($conexion) . "</h3>";
 			}

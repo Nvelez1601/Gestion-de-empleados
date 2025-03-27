@@ -16,7 +16,7 @@
 
 <!DOCTYPE html>
 
-<html lang="es">
+<html lang="es">             <!-- formulario de inicio sesion de empleados -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,7 +78,7 @@
 
             <!-- Formulario registro -->
             <div class="contenedor-formulario">
-                <form method="post" action="../php/registrar_empleados.php" class="formulario-registro">
+                <form method="post" action="../php/registrar_empleados_copy.php" class="formulario-registro">
                     <h2>Registro</h2>
 
                     <span>Rellene los campos para registrar al empleado.</span>
@@ -89,7 +89,7 @@
                         <input type="text" name="nombre" placeholder="Nombre" required required maxlength="25">
                     </div>
 
-                    <!-- Contenedor apellido -->
+                    <!-- Contenedor usuario -->
                     <div class="contenedor-input">
                         <ion-icon name="person-outline"></ion-icon>
                         <input type="text" name="usuario" placeholder="Apellido" required required maxlength="25">
@@ -117,16 +117,16 @@
 
                 <!-- Seccion para cambiar de inicio de sesión a registro -->
                 <div class="bienvenida-registro bienvenida">
-                    <img src="../img/santa_maria_logo2.jpg" alt="Logo Santa Maria" class="logo-sm">
-                    <h3>¡Hola, administrador/a!</h3>
+                    <img src="../img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
+                    <h3>¡Bienvenido, administrador/a!</h3>
                     <button class="boton-formulario" id="btn-registro">Registrar<ion-icon name="arrow-forward-outline"></ion-icon></button>
                     <button class="boton-formulario" id="btn-registro">Cerrar sesión<ion-icon name="log-out-outline"></ion-icon></button>
                 </div>
 
                 <!-- Seccion para cambiar de registro a inicio de sesion -->
                 <div class="bienvenida-inicio-sesion bienvenida">
-                    <img src="../img/santa_maria_logo2.jpg" alt="Logo Santa Maria" class="logo-sm">
-                    <h3>¡Hola, administrador/a!</h3>
+                    <img src="../img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
+                    <h3>¡Bienvenido, administrador/a!</h3>
                     <button class="boton-formulario" id="btn-inicio-sesion"><ion-icon name="arrow-back-outline"></ion-icon>Historial de acceso</button>
                     <button class="boton-formulario" id="btn-inicio-sesion"><ion-icon name="log-out-outline"></ion-icon>Cerrar sesión</button>
                 </div>

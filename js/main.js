@@ -1,39 +1,113 @@
-// Ejecutar automáticamente al cargar la página de marcar entrada y salida
-// Utilizamos la API de MediaDevices.getUserMedia, que es una API nativa de navegadores actuales
+// js/main.js
 window.onload = async function () {
     const cameraContainer = document.getElementById("contenedor-camara");
     const cameraStream = document.getElementById("mostrar-camara");
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
 
-    // Aseguramos de que el contenedor de la cámara esté visible
+    // Configuración para móviles
+    cameraStream.setAttribute("autoplay", "");
+    cameraStream.setAttribute("playsinline", "");
     cameraContainer.style.display = "block";
 
+    const validarQR = async (qrID) => {
+        try {
+            const response = await fetch('../php/validar_qr.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${encodeURIComponent(qrID)}`
+            });
+            
+            const resultado = await response.json();
+            
+            if(resultado.exito) {
+                alert(`✅ Acceso permitido\nBienvenido: ${resultado.usuario.nombre}`);
+            } else {
+                alert(`❌ Error: ${resultado.mensaje}`);
+                setTimeout(() => location.reload(), 2000); // Recargar para reintentar
+            }
+            
+        } catch (error) {
+            console.error('Error en la validación:', error);
+            alert('⚠️ Error de conexión con el servidor');
+        }
+    };
+
+    const scanQR = () => {
+        try {
+            if (cameraStream.videoWidth === 0 || !cameraStream.srcObject) {
+                requestAnimationFrame(scanQR);
+                return;
+            }
+
+            canvas.width = cameraStream.videoWidth;
+            canvas.height = cameraStream.videoHeight;
+            context.drawImage(cameraStream, 0, 0, canvas.width, canvas.height);
+
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const qrCode = jsQR(imageData.data, imageData.width, imageData.height, {
+                inversionAttempts: "dontInvert"
+            });
+
+            if (qrCode) {
+                const qrID = qrCode.data.trim();
+                
+                // Validar formato del ID
+                if(!/^[A-Za-z0-9]{6}$/.test(qrID)) {
+                    alert("❌ El QR debe contener exactamente 6 caracteres alfanuméricos");
+                    detenerCamara();
+                    setTimeout(() => location.reload(), 2000);
+                    return;
+                }
+                
+                detenerCamara();
+                validarQR(qrID);
+                return;
+            }
+            
+            requestAnimationFrame(scanQR);
+
+        } catch (error) {
+            console.error("Error en escaneo:", error);
+        }
+    };
+
     try {
-        // Accede a la cámara del dispositivo
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { 
+                facingMode: "environment",
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            }
+        });
+        
         cameraStream.srcObject = stream;
+        cameraStream.onplaying = () => scanQR();
+
     } catch (error) {
-        // Manejo de errores por si no se puede acceder a la cámara
-        console.error("No se pudo acceder a la cámara:", error);
-        alert("Hubo un problema al acceder a la cámara. Verifique los permisos del navegador o verifique la funcionalidad de su cámara.");
+        alert("⚠️ Error al acceder a la cámara: " + error.message);
     }
 };
 
-// -------------------------------------------------------------------------------------------
+// Función para detener la cámara
+window.detenerCamara = function() {
+    const video = document.getElementById('mostrar-camara');
+    if (video.srcObject) {
+        video.srcObject.getTracks().forEach(track => track.stop());
+    }
+};
 
-// Eventos para aplicar transiciones en los distintos formularios (COMENTAR TODO CTRL + K + C ; DESCOMENTAR CTRL + K + U)
+// Código para transiciones de formularios (original)
 const contenedor_registro = document.querySelector(".contenedor-registro");
 const btnInicioSesion = document.getElementById("btn-inicio-sesion");
 const btnRegistro = document.getElementById("btn-registro");
 
-// Funciones encargadas de dar animacion a la hora de cambiar pestañas para mostrar y ocultar contenido
-
-// Al hacer click quitar la clase "toggle"
-btnInicioSesion.addEventListener("click", ()=>{
+btnInicioSesion.addEventListener("click", () => {
     contenedor_registro.classList.remove("toggle");
 });
-// Al hacer click añadir la clase "toggle"
-btnRegistro.addEventListener("click", ()=>{
+
+btnRegistro.addEventListener("click", () => {
     contenedor_registro.classList.add("toggle");
 });
-
-// -------------------------------------------------------------------------------------------

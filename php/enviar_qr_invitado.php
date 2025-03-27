@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {   // php encargado de enviar QR creado de invitado
     // Obtener los datos del formulario
     $nombre = $_POST['nombre_invitado'];
     $correo = $_POST['correo_invitado'];
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Ejecutar el script de Python
         $comando = "$ruta_python $correo $nombre";
-        $output = shell_exec(command: $comando . " 2>&1"); // Capturar la salida del script
+        $output = shell_exec(command: $comando . " 2>&1");      // Capturar la salida del script
 
         // Verificar si el script se ejecutó correctamente
         if ($output) {
