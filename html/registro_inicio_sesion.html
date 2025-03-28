@@ -48,31 +48,33 @@
         <!-- Recuadro de opciones -->
         <div class="contenedor-registro">
 
-            <!-- Formulario inicio de sesion -->
+            <!-- Historial de entradas y salidas -->
             <div class="contenedor-formulario">
 
                 <!-- Etiqueta form para abrir seccion del formulario -->
                 <form method="post" action="../php/registrar_empleados.php" class="formulario-inicio-sesion">
-                    <h2>Inicio de sesión</h2>
 
-                    <span>Ingrese los datos de su cuenta.</span>
+                    <h2>Historial de accesos</h2>
 
-                    <!-- Contenedor email -->
-                    <div class="contenedor-input">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" placeholder="Email" required>
+                    <!-- Seleccionar fecha -->
+                    <div class="controles-historial">
+                        <div class="contenedor-input">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                            <input type="date" id="fecha-historial" name="fecha-historial" max="">
+                        </div>
+                        
+                        <!-- Seleccionar tipo de informacion a mostrar -->
+                        <div class="">
+                            <ion-icon name="filter-outline"></ion-icon>
+
+                            <!-- Distintas opciones -->
+                            <select id="tipo-registro" name="tipo-registro">
+                                <option value="entrada">Entradas</option>
+                                <option value="salida">Salidas</option>
+                                <option value="invitado">Invitados</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <!-- Contenedor contraseña -->
-                    <div class="contenedor-input">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" placeholder="Contraseña" required>
-                    </div>
-
-                    <!-- Link para recuperar su contraseña -->
-                    <a href="#">¿Olvidó su contraseña?</a>
-                    <a href="#"><button class="boton-formulario">Iniciar sesión</button></a>
-                    
                 </form>
             </div>
 
