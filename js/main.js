@@ -1,11 +1,14 @@
 // js/main.js
+
 window.onload = async function () {
     const cameraContainer = document.getElementById("contenedor-camara");
     const cameraStream = document.getElementById("mostrar-camara");
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
 
-    // Configuración para móviles
+    // Detectar si es entrada o salida según el título de la página
+    const tipoRegistro = document.title.includes("entrada") ? "entrada" : "salida";
+
     cameraStream.setAttribute("autoplay", "");
     cameraStream.setAttribute("playsinline", "");
     cameraContainer.style.display = "block";
@@ -23,15 +26,20 @@ window.onload = async function () {
             const resultado = await response.json();
             
             if(resultado.exito) {
-                alert(`✅ Acceso permitido\nBienvenido: ${resultado.usuario.nombre}`);
+                let mensaje = resultado.mensaje;
+                if(resultado.mensaje.includes('Horas trabajadas')) {
+                    const horas = resultado.mensaje.split(': ')[1];
+                    mensaje = `✅ ${resultado.usuario.nombre_completo}\nHoras trabajadas hoy: ${horas} hrs`;
+                } else {
+                    mensaje = `✅ ${resultado.usuario.nombre_completo}\n${resultado.mensaje}`;
+                }
+                alert(mensaje);
             } else {
                 alert(`❌ Error: ${resultado.mensaje}`);
-                setTimeout(() => location.reload(), 2000); // Recargar para reintentar
             }
-            
         } catch (error) {
-            console.error('Error en la validación:', error);
-            alert('⚠️ Error de conexión con el servidor');
+            console.error('Error:', error);
+            alert('⚠️ Error de conexión');
         }
     };
 
@@ -53,20 +61,19 @@ window.onload = async function () {
 
             if (qrCode) {
                 const qrID = qrCode.data.trim();
-                
-                // Validar formato del ID
-                if(!/^[A-Za-z0-9]{6}$/.test(qrID)) {
+
+                if (!/^[A-Za-z0-9]{6}$/.test(qrID)) {
                     alert("❌ El QR debe contener exactamente 6 caracteres alfanuméricos");
                     detenerCamara();
                     setTimeout(() => location.reload(), 2000);
                     return;
                 }
-                
+
                 detenerCamara();
                 validarQR(qrID);
                 return;
             }
-            
+
             requestAnimationFrame(scanQR);
 
         } catch (error) {
@@ -76,13 +83,13 @@ window.onload = async function () {
 
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { 
+            video: {
                 facingMode: "environment",
                 width: { ideal: 1280 },
                 height: { ideal: 720 }
             }
         });
-        
+
         cameraStream.srcObject = stream;
         cameraStream.onplaying = () => scanQR();
 
@@ -92,7 +99,7 @@ window.onload = async function () {
 };
 
 // Función para detener la cámara
-window.detenerCamara = function() {
+window.detenerCamara = function () {
     const video = document.getElementById('mostrar-camara');
     if (video.srcObject) {
         video.srcObject.getTracks().forEach(track => track.stop());

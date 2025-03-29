@@ -50,30 +50,23 @@
 
             <!-- Historial de entradas y salidas -->
             <div class="contenedor-formulario">
-
-                <!-- Etiqueta form para abrir seccion del formulario -->
-                <form method="post" action="../php/registrar_empleados.php" class="formulario-inicio-sesion">
+                <form method="post" action="../php/historial_accesos2.php" class="formulario-inicio-sesion">
 
                     <h2>Historial de accesos</h2>
 
-                    <!-- Seleccionar fecha -->
                     <div class="controles-historial">
                         <div class="contenedor-input">
                             <ion-icon name="calendar-outline"></ion-icon>
-                            <input type="date" id="fecha-historial" name="fecha-historial" max="">
+                            <input type="date" 
+                                   id="fecha-historial" 
+                                   name="fecha-historial"
+                                   max="<?php echo date('Y-m-d'); ?>"
+                                   value="<?php echo date('Y-m-d'); ?>"
+                                   required>
                         </div>
-                        
-                        <!-- Seleccionar tipo de informacion a mostrar -->
-                        <div class="">
-                            <ion-icon name="filter-outline"></ion-icon>
-
-                            <!-- Distintas opciones -->
-                            <select id="tipo-registro" name="tipo-registro">
-                                <option value="entrada">Entradas</option>
-                                <option value="salida">Salidas</option>
-                                <option value="invitado">Invitados</option>
-                            </select>
-                        </div>
+                        <button type="submit" class="btn-buscar">
+                            <ion-icon name="search-outline"></ion-icon> Buscar
+                        </button>
                     </div>
                 </form>
             </div>
