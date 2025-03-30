@@ -1,111 +1,5 @@
 // js/main.js
 
-window.onload = async function () {
-    const cameraContainer = document.getElementById("contenedor-camara");
-    const cameraStream = document.getElementById("mostrar-camara");
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-
-    // Detectar si es entrada o salida según el título de la página
-    const tipoRegistro = document.title.includes("entrada") ? "entrada" : "salida";
-
-    cameraStream.setAttribute("autoplay", "");
-    cameraStream.setAttribute("playsinline", "");
-    cameraContainer.style.display = "block";
-
-    const validarQR = async (qrID) => {
-        try {
-            const response = await fetch('../php/validar_qr.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `id=${encodeURIComponent(qrID)}`
-            });
-            
-            const resultado = await response.json();
-            
-            if(resultado.exito) {
-                let mensaje = resultado.mensaje;
-                if(resultado.mensaje.includes('Horas trabajadas')) {
-                    const horas = resultado.mensaje.split(': ')[1];
-                    mensaje = `✅ ${resultado.usuario.nombre_completo}\nHoras trabajadas hoy: ${horas} hrs`;
-                } else {
-                    mensaje = `✅ ${resultado.usuario.nombre_completo}\n${resultado.mensaje}`;
-                }
-                alert(mensaje);
-            } else {
-                alert(`❌ Error: ${resultado.mensaje}`);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('⚠️ Error de conexión');
-        }
-    };
-
-    const scanQR = () => {
-        try {
-            if (cameraStream.videoWidth === 0 || !cameraStream.srcObject) {
-                requestAnimationFrame(scanQR);
-                return;
-            }
-
-            canvas.width = cameraStream.videoWidth;
-            canvas.height = cameraStream.videoHeight;
-            context.drawImage(cameraStream, 0, 0, canvas.width, canvas.height);
-
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const qrCode = jsQR(imageData.data, imageData.width, imageData.height, {
-                inversionAttempts: "dontInvert"
-            });
-
-            if (qrCode) {
-                const qrID = qrCode.data.trim();
-
-                if (!/^[A-Za-z0-9]{6}$/.test(qrID)) {
-                    alert("❌ El QR debe contener exactamente 6 caracteres alfanuméricos");
-                    detenerCamara();
-                    setTimeout(() => location.reload(), 2000);
-                    return;
-                }
-
-                detenerCamara();
-                validarQR(qrID);
-                return;
-            }
-
-            requestAnimationFrame(scanQR);
-
-        } catch (error) {
-            console.error("Error en escaneo:", error);
-        }
-    };
-
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: "environment",
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            }
-        });
-
-        cameraStream.srcObject = stream;
-        cameraStream.onplaying = () => scanQR();
-
-    } catch (error) {
-        alert("⚠️ Error al acceder a la cámara: " + error.message);
-    }
-};
-
-// Función para detener la cámara
-window.detenerCamara = function () {
-    const video = document.getElementById('mostrar-camara');
-    if (video.srcObject) {
-        video.srcObject.getTracks().forEach(track => track.stop());
-    }
-};
-
 // Código para transiciones de formularios (original)
 const contenedor_registro = document.querySelector(".contenedor-registro");
 const btnInicioSesion = document.getElementById("btn-inicio-sesion");
@@ -118,3 +12,13 @@ btnInicioSesion.addEventListener("click", () => {
 btnRegistro.addEventListener("click", () => {
     contenedor_registro.classList.add("toggle");
 });
+
+
+
+// Función para cerrar sesión y redirigir
+function cerrarSesion() {
+    // Redirección a index.html después de 500ms (medio segundo)
+    setTimeout(function() {
+        window.location.href = "index.html";
+    }, 500);
+}

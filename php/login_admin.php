@@ -27,12 +27,14 @@ if (isset($_POST['btn_inicio_admin'])) {
             
         } else {
             // Si el usuario no existe o la contraseña es incorrecta
-            echo '<div class="alert alert-danger">Usuario o contraseña incorrectos.</div>';
+            echo '<script>alert("Usuario o contraseña incorrectos."); window.history.back();</script>';
+            exit();
         }
 
     } else {
         // Si los campos están vacíos
-        echo '<div class="alert alert-danger">Los campos están vacíos</div>';
+        echo '<script>alert("Los campos están vacíos."); window.history.back();</script>';
+        exit();
     }
 }
 ?>

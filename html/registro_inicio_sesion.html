@@ -54,6 +54,7 @@
 
                     <h2>Historial de accesos</h2>
 
+                    <!-- Contenedor para recibir la fecha al buscar en la base de datos -->
                     <div class="controles-historial">
                         <div class="contenedor-input">
                             <ion-icon name="calendar-outline"></ion-icon>
@@ -64,12 +65,14 @@
                                    value="<?php echo date('Y-m-d'); ?>"
                                    required>
                         </div>
-                        <button type="submit" class="btn-buscar">
-                            <ion-icon name="search-outline"></ion-icon> Buscar
-                        </button>
                     </div>
+
+                    <!-- Boton de buscar para recibir el historial -->
+                    <button type="submit" class="btn-buscar">Buscar</button>
                 </form>
             </div>
+
+            
 
             <!-- Formulario registro -->
             <div class="contenedor-formulario">
@@ -102,6 +105,7 @@
                         <input type="password" name="contrasena" placeholder="Contraseña" required required maxlength="25">
                     </div>
 
+                    <!-- Boton de terminar registro -->
                     <button type="submit" name="btn_register" class="boton-formulario">Registrar</button></a>
                     
                 </form>
@@ -115,7 +119,7 @@
                     <img src="../img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
                     <h3>¡Bienvenido, administrador/a!</h3>
                     <button class="boton-formulario" id="btn-registro">Registrar<ion-icon name="arrow-forward-outline"></ion-icon></button>
-                    <button class="boton-formulario" id="btn-registro">Cerrar sesión<ion-icon name="log-out-outline"></ion-icon></button>
+                    <button class="boton-formulario" id="btn-registro" onclick="cerrarSesion()">Cerrar sesión<ion-icon name="log-out-outline"></ion-icon></button>
                 </div>
 
                 <!-- Seccion para cambiar de registro a inicio de sesion -->
@@ -123,7 +127,7 @@
                     <img src="../img/logo_usm.png" alt="Logo Santa Maria" class="logo-usm-png">
                     <h3>¡Bienvenido, administrador/a!</h3>
                     <button class="boton-formulario" id="btn-inicio-sesion"><ion-icon name="arrow-back-outline"></ion-icon>Historial de acceso</button>
-                    <button class="boton-formulario" id="btn-inicio-sesion"><ion-icon name="log-out-outline"></ion-icon>Cerrar sesión</button>
+                    <button class="boton-formulario" id="btn-inicio-sesion" onclick="cerrarSesion()"><ion-icon name="log-out-outline"></ion-icon>Cerrar sesión</button>
                 </div>
             </div>
         </div>

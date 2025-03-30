@@ -276,7 +276,7 @@ body {
     margin-top: 5px;
     text-decoration: none;
 }
-.boton-formulario {
+.boton-formulario, .btn-buscar {
     width: 17rem;
     height: 45px;
     font-size: 15px;
@@ -518,6 +518,9 @@ body {
     padding: 1.5rem 0 2rem 0;
     border-bottom: 1px solid silver;
 }
+.formulario-inicio-sesion-admin h2 {
+    text-align: center;
+}
 .formulario-inicio-sesion-admin p {
     text-align: center;
     font-size: 1.8rem;
@@ -678,5 +681,5 @@ input[type="submit"]:hover {
     color: black;
 }
 
-/* PRUEBA */
+/* ------------------------ ESTILOS DE LAS TABLAS DE HISTORIAL DE ACCESO ------------------------ */
 

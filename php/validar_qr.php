@@ -1,120 +1,141 @@
 <?php
-    header('Content-Type: application/json');
-    require 'conex_db.php';
+header('Content-Type: application/json');
+require 'conex_db.php';
 
-    $response = [
-        'exito' => false,
-        'mensaje' => 'Error desconocido',
-        'usuario' => null
-    ];
+$response = [
+    'exito' => false,
+    'mensaje' => 'Error desconocido',
+    'usuario' => null
+];
 
-    try {
-        // Validación más robusta
-        if(!isset($_POST['id'])) {
-            throw new Exception('ID no recibido');
-        }
-
-        $id = trim($_POST['id']);
-        
-        // Validación de formato
-        if(!preg_match('/^[A-Za-z0-9]{6}$/', $id)) {
-            throw new Exception('Formato de ID inválido (debe ser 6 caracteres alfanuméricos)');
-        }
-
-        // Preparar consulta con sentencia preparada para mayor seguridad
-        $query = "SELECT ID, CONCAT(nombre, ' ', apellido) AS nombre_completo, correo, fecha_reg 
-                FROM login_db 
-                WHERE ID = ? 
-                LIMIT 1";
-        
-        $stmt = mysqli_prepare($conexion, $query);
-        mysqli_stmt_bind_param($stmt, 's', $id);
-        mysqli_stmt_execute($stmt);
-        $resultado = mysqli_stmt_get_result($stmt);
-
-        if(!$resultado) {
-            throw new Exception('Error en consulta: ' . mysqli_error($conexion));
-        }
-
-        if(mysqli_num_rows($resultado) > 0) {
-            $usuario = mysqli_fetch_assoc($resultado);
-            
-            // Iniciar transacción
-            mysqli_begin_transaction($conexion);
-            
-            // Verificar si ya tiene entrada sin salida hoy
-            $check_query = "SELECT id FROM historial_accesos 
-                        WHERE empleado_id = ? 
-                        AND fecha = CURDATE() 
-                        AND hora_salida IS NULL
-                        LIMIT 1";
-            
-            $stmt_check = mysqli_prepare($conexion, $check_query);
-            mysqli_stmt_bind_param($stmt_check, 's', $id);
-            mysqli_stmt_execute($stmt_check);
-            $check_result = mysqli_stmt_get_result($stmt_check);
-            
-            if(mysqli_num_rows($check_result) > 0) {
-                // Registrar salida
-                $update_query = "UPDATE historial_accesos 
-                    SET hora_salida = CURTIME(),
-                        horas_trabajadas = TIMEDIFF(CURTIME(), hora_entrada)
-                    WHERE empleado_id = ? 
-                    AND fecha = CURDATE() 
-                    AND hora_salida IS NULL";
-                
-                $stmt_update = mysqli_prepare($conexion, $update_query);
-                mysqli_stmt_bind_param($stmt_update, 's', $id);
-                $update_result = mysqli_stmt_execute($stmt_update);
-                
-                if(!$update_result) {
-                    throw new Exception('Error al registrar salida: ' . mysqli_error($conexion));
-                }
-                
-                $response = [
-                    'exito' => true,
-                    'mensaje' => 'Salida registrada correctamente',
-                    'usuario' => $usuario
-                ];
-            } else {
-                // Registrar nueva entrada
-                $insert_query = "INSERT INTO historial_accesos 
-                                (empleado_id, nombre_completo, fecha, hora_entrada)
-                                VALUES (?, ?, CURDATE(), CURTIME())";
-                
-                $stmt_insert = mysqli_prepare($conexion, $insert_query);
-                mysqli_stmt_bind_param($stmt_insert, 'ss', $id, $usuario['nombre_completo']);
-                $insert_result = mysqli_stmt_execute($stmt_insert);
-                
-                if(!$insert_result) {
-                    throw new Exception('Error al registrar acceso: ' . mysqli_error($conexion));
-                }
-                
-                $response = [
-                    'exito' => true,
-                    'mensaje' => 'Acceso concedido - Entrada registrada',
-                    'usuario' => $usuario
-                ];
-            }
-            
-            // Confirmar transacción
-            mysqli_commit($conexion);
-        } else {
-            throw new Exception('Usuario no encontrado con ID: ' . htmlspecialchars($id));
-        }
-
-    } catch (Exception $e) {
-        // Revertir en caso de error
-        if(isset($conexion)) {
-            mysqli_rollback($conexion);
-        }
-        $response['mensaje'] = $e->getMessage();
-    } finally {
-        if(isset($stmt)) mysqli_stmt_close($stmt);
-        if(isset($stmt_check)) mysqli_stmt_close($stmt_check);
-        if(isset($stmt_update)) mysqli_stmt_close($stmt_update);
-        if(isset($stmt_insert)) mysqli_stmt_close($stmt_insert);
-        if(isset($conexion)) mysqli_close($conexion);
-        echo json_encode($response);
+try {
+    // 1. Validar que recibimos el ID del empleado
+    if(!isset($_POST['id']) || empty(trim($_POST['id']))) {
+        throw new Exception('No se recibió el ID del empleado');
     }
-?>
+
+    $id_empleado = mysqli_real_escape_string($conexion, trim($_POST['id']));
+
+    // 2. Validación de formato
+    if(!preg_match('/^[A-Za-z0-9]{6}$/', $id_empleado)) {
+        throw new Exception('Formato de ID inválido (debe ser 6 caracteres alfanuméricos)');
+    }
+
+    // 3. Verificar que el empleado existe en login_db
+    $query_empleado = "SELECT ID, CONCAT(nombre, ' ', apellido) AS nombre_completo 
+                      FROM login_db 
+                      WHERE ID = ? 
+                      LIMIT 1";
+    
+    $stmt_empleado = mysqli_prepare($conexion, $query_empleado);
+    mysqli_stmt_bind_param($stmt_empleado, 's', $id_empleado);
+    mysqli_stmt_execute($stmt_empleado);
+    $result_empleado = mysqli_stmt_get_result($stmt_empleado);
+
+    if(!$result_empleado) {
+        throw new Exception('Error al buscar empleado: ' . mysqli_error($conexion));
+    }
+
+    if(mysqli_num_rows($result_empleado) === 0) {
+        throw new Exception('Empleado no registrado en el sistema');
+    }
+
+    $empleado = mysqli_fetch_assoc($result_empleado);
+
+    // 4. Verificar registros de hoy en historial_accesos
+    $query_verificacion = "SELECT 
+                          SUM(CASE WHEN hora_entrada IS NOT NULL THEN 1 ELSE 0 END) AS entradas,
+                          SUM(CASE WHEN hora_salida IS NOT NULL THEN 1 ELSE 0 END) AS salidas
+                          FROM historial_accesos
+                          WHERE empleado_id = ?
+                          AND fecha = CURDATE()";
+    
+    $stmt_verificacion = mysqli_prepare($conexion, $query_verificacion);
+    mysqli_stmt_bind_param($stmt_verificacion, 's', $id_empleado);
+    mysqli_stmt_execute($stmt_verificacion);
+    $result_verificacion = mysqli_stmt_get_result($stmt_verificacion);
+
+    if(!$result_verificacion) {
+        throw new Exception('Error al verificar asistencia: ' . mysqli_error($conexion));
+    }
+
+    $registros = mysqli_fetch_assoc($result_verificacion);
+    $tiene_entrada = $registros['entradas'] > 0;
+    $tiene_salida = $registros['salidas'] > 0;
+
+    // 5. Validar si ya completó ambos registros hoy
+    if($tiene_entrada && $tiene_salida) {
+        throw new Exception('Querido empleado, usted ya ha marcado su entrada y su salida el día de hoy.');
+    }
+
+    // 6. Determinar tipo de registro (entrada o salida)
+    if(!$tiene_entrada) {
+        // Registrar entrada
+        $query_insert = "INSERT INTO historial_accesos 
+                        (empleado_id, nombre_completo, fecha, hora_entrada)
+                        VALUES (?, ?, CURDATE(), CURTIME())";
+        
+        $stmt_insert = mysqli_prepare($conexion, $query_insert);
+        mysqli_stmt_bind_param($stmt_insert, 'ss', $id_empleado, $empleado['nombre_completo']);
+        $result_insert = mysqli_stmt_execute($stmt_insert);
+        
+        if(!$result_insert) {
+            throw new Exception('Error al registrar entrada: ' . mysqli_error($conexion));
+        }
+        
+        $response = [
+            'exito' => true,
+            'mensaje' => 'Entrada registrada correctamente',
+            'usuario' => $empleado
+        ];
+    } else {
+        // Registrar salida
+        $query_update = "UPDATE historial_accesos 
+                       SET hora_salida = CURTIME(),
+                           horas_trabajadas = TIMEDIFF(CURTIME(), hora_entrada)
+                       WHERE empleado_id = ?
+                       AND fecha = CURDATE()
+                       AND hora_salida IS NULL";
+        
+        $stmt_update = mysqli_prepare($conexion, $query_update);
+        mysqli_stmt_bind_param($stmt_update, 's', $id_empleado);
+        $result_update = mysqli_stmt_execute($stmt_update);
+        
+        if(!$result_update) {
+            throw new Exception('Error al registrar salida: ' . mysqli_error($conexion));
+        }
+        
+        // Obtener horas trabajadas
+        $query_horas = "SELECT horas_trabajadas 
+                       FROM historial_accesos
+                       WHERE empleado_id = ?
+                       AND fecha = CURDATE()
+                       ORDER BY id DESC
+                       LIMIT 1";
+        
+        $stmt_horas = mysqli_prepare($conexion, $query_horas);
+        mysqli_stmt_bind_param($stmt_horas, 's', $id_empleado);
+        mysqli_stmt_execute($stmt_horas);
+        $result_horas = mysqli_stmt_get_result($stmt_horas);
+        $horas = mysqli_fetch_assoc($result_horas);
+        
+        $response = [
+            'exito' => true,
+            'mensaje' => 'Salida registrada correctamente. Horas trabajadas: ' . $horas['horas_trabajadas'],
+            'usuario' => $empleado
+        ];
+    }
+
+} catch (Exception $e) {
+    $response['mensaje'] = $e->getMessage();
+} finally {
+    // Cerrar todas las conexiones
+    if(isset($stmt_empleado)) mysqli_stmt_close($stmt_empleado);
+    if(isset($stmt_verificacion)) mysqli_stmt_close($stmt_verificacion);
+    if(isset($stmt_insert)) mysqli_stmt_close($stmt_insert);
+    if(isset($stmt_update)) mysqli_stmt_close($stmt_update);
+    if(isset($stmt_horas)) mysqli_stmt_close($stmt_horas);
+    if(isset($conexion)) mysqli_close($conexion);
+    
+    echo json_encode($response);
+}

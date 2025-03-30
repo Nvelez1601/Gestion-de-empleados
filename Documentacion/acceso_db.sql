@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 29-03-2025 a las 15:31:29
--- Versión del servidor: 9.1.0
--- Versión de PHP: 8.3.14
+-- Tiempo de generación: 30-03-2025 a las 00:01:32
+-- Versión del servidor: 8.3.0
+-- Versión de PHP: 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,18 +58,40 @@ CREATE TABLE IF NOT EXISTS `historial_accesos` (
   `horas_trabajadas` time DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `empleado_id` (`empleado_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=223 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `historial_accesos`
 --
 
 INSERT INTO `historial_accesos` (`id`, `empleado_id`, `nombre_completo`, `fecha`, `hora_entrada`, `hora_salida`, `horas_trabajadas`) VALUES
-(15, 'M2S69Q', 'fabian yanes', '2025-03-29', '01:05:07', '01:05:19', NULL),
-(7, 'MV613V', 'henry henrydcm', '2025-03-29', '00:45:32', '00:55:21', NULL),
-(8, '7U70TB', 'diego hayato', '2025-03-29', '00:48:15', '00:48:25', NULL),
-(9, '7U70TB', 'diego hayato', '2025-03-29', '00:48:33', '00:50:07', NULL),
-(16, 'M2S69Q', 'fabian yanes', '2025-03-29', '01:31:15', '01:32:37', '00:01:22');
+(16, 'M2S69Q', 'fabian yanes', '2025-03-29', '01:31:15', '01:32:37', '00:01:22'),
+(1, '111AAA', 'Juan Ruiz', '2025-03-29', '01:00:00', '01:50:00', '00:50:00'),
+(222, '222BBB', 'Lionel Messi', '2025-03-29', '01:00:00', '01:50:00', '00:50:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `invitados`
+--
+
+DROP TABLE IF EXISTS `invitados`;
+CREATE TABLE IF NOT EXISTS `invitados` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(25) NOT NULL,
+  `correo` varchar(30) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `invitados`
+--
+
+INSERT INTO `invitados` (`id`, `nombre`, `correo`, `fecha`, `hora`) VALUES
+(1, 'Juan', 'juancruiz08@gmail.com', '2025-03-29', '19:28:00'),
+(2, 'Pepe', 'juancruiz08@gmail.com', '2025-03-30', '20:11:33');
 
 -- --------------------------------------------------------
 
@@ -102,6 +124,32 @@ INSERT INTO `login_db` (`ID`, `nombre`, `apellido`, `correo`, `contrasena`, `fec
 ('21MH7H', 'fabian', 'yanes', 'fabyanes0614@gmail.com', '$2y$10$jlxQCWe2kUCR5swj/HMzbOGoEV6Gp8JpOeCCk4XctOO77Rq1kqoLG', '2025-03-27'),
 ('61JFV0', 'abraham', 'paredes', 'abrahamparedes2002@gmail.com', '$2y$10$qiBjXxr181JP2TvRI1x7/uwlUwSL1chYCOFydg2o8ndx.6pNns.4C', '2025-03-25'),
 ('989TUA', 'jose', 'soler', 'soleryajuri@gmail.com', '$2y$10$MR62lf3CDYYNp0/O.c6HZe4EkamFVqlPogZyfvZmG/pJoZzbw74lO', '2025-03-26');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_entrada`
+--
+
+DROP TABLE IF EXISTS `reg_entrada`;
+CREATE TABLE IF NOT EXISTS `reg_entrada` (
+  `ID` varchar(6) COLLATE utf8mb4_general_ci NOT NULL,
+  `reg_fecha` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `reg_hr` varchar(15) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reg_salida`
+--
+
+DROP TABLE IF EXISTS `reg_salida`;
+CREATE TABLE IF NOT EXISTS `reg_salida` (
+  `ID` varchar(6) COLLATE utf8mb4_general_ci NOT NULL,
+  `reg_fecha` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `reg_hr` varchar(15) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

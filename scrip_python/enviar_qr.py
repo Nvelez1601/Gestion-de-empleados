@@ -27,7 +27,7 @@ def enviar_qr():
             return jsonify({'error': 'Faltan datos'}), 400
 
         # Generar el código QR
-        contenido_qr = f"{nombre}\n{correo}"
+        contenido_qr = f"Nombre: {nombre}\nCorreo: {correo}"
         print("Contenido del QR:", contenido_qr)  # Log para el contenido del QR
 
         qr = qrcode.QRCode(
