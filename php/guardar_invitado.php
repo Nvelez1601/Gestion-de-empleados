@@ -2,6 +2,9 @@
 header('Content-Type: application/json');
 require 'conex_db.php';
 
+// Configurar zona horaria para Caracas, Venezuela
+date_default_timezone_set('America/Caracas');
+
 $response = [
     'exito' => false,
     'mensaje' => 'Error desconocido'
