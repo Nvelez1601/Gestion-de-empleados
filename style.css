@@ -1,0 +1,699 @@
+/* Estilos base */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #FFFFFF; /* Texto en blanco para mayor contraste */
+    overflow: hidden;
+    background: linear-gradient(135deg,  
+        #B0C4DE 10%,  /* Azul claro presente desde los bordes */
+        #1C314A 25%,  /* Azul grisáceo */
+        #0A1B33 40%,  /* Azul oscuro para contraste */
+        #87A9D6 55%,  /* Azul medio en el centro */
+        #B0C4DE 70%,  /* Azul claro vuelve a aparecer */
+        #4977A5 85%,  /* Azul intenso */
+        #B0C4DE 95%   /* Azul claro en los extremos */
+    ),
+    linear-gradient(120deg,  
+        rgba(176, 196, 222, 0.9) 15%,  /* Azul claro en más proporción */
+        rgba(100, 140, 180, 0.8) 35%,  
+        rgba(20, 40, 60, 0.7) 60%,  
+        rgba(176, 196, 222, 0.9) 85%   /* Azul claro reaparece */
+    ),
+    linear-gradient(60deg,  
+        #B0C4DE 10%,  
+        #1C314A 40%,  
+        #0A1B33 70%,  
+        #B0C4DE 90%  
+    );
+    background-blend-mode: overlay, multiply, soft-light;
+    background-attachment: fixed;
+}
+
+/* Fondo de partículas */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 0;
+}
+
+/* Contenedor principal */
+.opciones-acceso {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 1.5s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+/* Título */
+.opciones-acceso h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.opciones-acceso p {
+    margin-bottom: 1rem;
+}
+.opciones-acceso .usuario-admin ion-icon {
+    color: black;
+}
+
+/* Contenedor de botones */
+.espaciado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* fuente Poppins */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Ajuste en la animación de los botones */
+.btn-marcaje {
+    display: inline-flex; /* Evita que la animación afecte el tamaño del botón */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-size: 16px;
+    padding: 12px 28px;
+    color: white;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+    outline: none;
+    will-change: transform;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, filter 0.3s ease;
+}
+
+.btn-marcaje i {
+    margin-right: 8px; /* Espacio entre el icono y el texto */
+    transition: transform 0.3s ease; /* Suaviza la animación del icono */
+}
+
+.btn-marcaje:hover {
+    transform: translateY(-2px); /* Eleva el botón sin cambiar su tamaño */
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 1);
+    filter: brightness(1.3);
+}
+
+.btn-marcaje:hover i {
+    transform: translateY(0); /* Evita distorsión del icono */
+}
+
+/* Eliminar subrayado y estilos no deseados en los enlaces */
+.espaciado a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media querys para dar toque responsive a la pagina */
+@media (max-width: 480px) {
+    .opciones-acceso {
+        padding: 2rem;
+    }
+
+    .opciones-acceso h1 {
+        font-size: 2rem;
+    }
+
+    .btn-marcaje {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Espacio donde se mostrara la camara */
+#contenedor-camara {
+    display: none; /* Ocultar por defecto */
+    position: relative;
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#mostrar-camara {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilos icono de volver */
+.icono-volver {
+    position: absolute; /* Posicionarlo de manera absoluta */
+    top: 1rem; /* Ajusta según sea necesario */
+    left: 1rem; /* Ajusta según sea necesario */
+    font-size: 3rem; /* Aumenta el tamaño del icono */
+    color: #fff; /* Color del icono */
+    z-index: 2; /* Asegúrate de que esté por encima de otros elementos */
+}
+.icono-volver a {
+    color: white;
+}
+
+/* Estilos del reloj y la fecha */
+.reloj {
+    font-size: 2rem; /* Tamaño grande para el reloj */
+    font-weight: 600; /* Más destacado */
+    color: #ffffff; /* Blanco para el texto */
+    position: relative;
+    text-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.3), /* Brillo más suave */
+        0 0 30px rgba(255, 255, 255, 0.2),
+        0 0 45px rgba(255, 255, 255, 0.1);
+    margin-bottom: 5px; /* Espacio entre el reloj y el logo */
+    padding: 10px;
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilos de la fecha */
+.fecha {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #f1f1f1;
+    text-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.3), 
+        0 0 30px rgba(255, 255, 255, 0.2), 
+        0 0 45px rgba(255, 255, 255, 0.1);
+    margin-top: 0;
+    opacity: 0.8;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+/* ---------- ESTILOS DE LA PAGINA DE REGISTRO DE EMPLEADOS ---------- */
+
+.estilo-body-registro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background: linear-gradient(135deg, #1f1c2c, #3a2c4a);
+}
+.contenedor-registro {
+    position: relative;
+    width: 80rem;
+    height: 50rem;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px gray;
+    border: 1px solid gainsboro;
+}
+.contenedor-formulario {
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+    color: black;
+}
+.contenedor-formulario form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in;
+}
+.contenedor-formulario h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+.contenedor-formulario span {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+.contenedor-input {
+    width: 30rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #EEEEEE;
+    border-radius: 1rem;
+}
+.contenedor-input input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE;
+}
+.contenedor-formulario a {
+    color: black;
+    font-size: 14px;
+    margin-bottom: 2rem;
+    margin-top: 5px;
+    text-decoration: none;
+}
+.boton-formulario, .btn-buscar {
+    width: 17rem;
+    height: 45px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    background-color: #4169E1;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.boton-formulario ion-icon {
+    font-size: 1.5rem; /* Aumenta el tamaño del icono */
+}
+
+/* Animaciones para el formulario */
+.formulario-registro {
+    transform: translateX(-100%);
+}
+.contenedor-registro.toggle .formulario-inicio-sesion{
+    transform: translateX(100%);
+}
+.contenedor-registro.toggle .formulario-registro{
+    transform: translateX(0);
+}
+
+/* Estilos seccion de bienvenida y cambio de secciones */
+.contenedor-bienvenida {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg,  
+        #1C314A 5%,   /* Azul grisáceo profundo */
+        #B0C4DE 20%,  /* Azul claro con más presencia */
+        #0A1B33 40%,  /* Azul oscuro para contraste */
+        #87A9D6 55%,  /* Azul medio fundiéndose con el oscuro */
+        #1C314A 65%,  /* Reaparece azul grisáceo */
+        #B0C4DE 80%,  /* Azul claro en transiciones */
+        #4977A5 95%   /* Azul intenso en los extremos */
+    ),
+    radial-gradient(circle at 30% 70%,  
+        rgba(176, 196, 222, 0.8) 10%,  
+        rgba(20, 40, 60, 0.7) 50%,  
+        rgba(100, 140, 180, 0.8) 90%  
+    ),
+    linear-gradient(60deg,  
+        #B0C4DE 15%,  
+        #1C314A 35%,  
+        #0A1B33 55%,  
+        #B0C4DE 85%  
+    );
+    background-blend-mode: overlay, multiply, soft-light;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    overflow: hidden;
+}
+
+.contenedor-registro.toggle .contenedor-bienvenida{
+    transform: translateX(0);
+}
+.contenedor-bienvenida .bienvenida {
+    position: absolute;
+    width: 74.4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 5rem;
+    color: white;
+    transition: transform 0.5s ease-in-out;
+}
+.bienvenida-inicio-sesion {
+    transform: translateX(120%);
+}
+.contenedor-bienvenida h3 {
+    font-size: 4rem;
+}
+.contenedor-bienvenida p {
+    font-size: 14px;
+    text-align: center;
+}
+.contenedor-bienvenida .boton-formulario {
+    border: 2px solid white;
+}
+
+.contenedor-registro.toggle .bienvenida-inicio-sesion{
+    transform: translateX(0);
+}
+.contenedor-registro.toggle .bienvenida-registro{
+    transform: translateX(-100%);
+}
+.logo-sm {
+    position: absolute;
+    top: -140px;
+    width: 300px; 
+    height: auto; 
+    border-radius: 10px; 
+    margin-bottom: 20px;
+}
+.logo-usm-png {
+    width: 250px;
+    height: auto;
+    text-align: center;
+}
+
+/* Para pantallas pequeñas, como móviles */
+@media screen and (max-width: 768px) {
+    .contenedor-formulario h2 {
+        font-size: 1.5rem; /* Reducimos el tamaño del encabezado */
+    }
+
+    .contenedor-formulario span {
+        font-size: 10px; /* Texto más pequeño para descripciones */
+    }
+
+    .contenedor-input {
+        width: 90%; /* Aumenta flexibilidad en ancho */
+        padding: 5px; /* Reduce el espacio interno */
+    }
+
+    .contenedor-input input {
+        font-size: 0.9rem; /* Texto más pequeño en los campos */
+    }
+
+    .boton-formulario {
+        width: 70%; /* Ajuste proporcional al contenedor */
+        padding: 8px; /* Reducimos el relleno */
+        font-size: 0.8rem; /* Texto más pequeño en botones */
+    }
+
+    .contenedor-bienvenida h3 {
+        font-size: 2rem; /* Tamaño del texto reducido */
+    }
+
+    .contenedor-bienvenida p {
+        font-size: 12px; /* Texto más pequeño para párrafos */
+    }
+
+    .logo-sm {
+        width: 12%; /* Logo más pequeño */
+        max-width: 100px; /* Aseguramos límites en el tamaño */
+    }
+}
+
+/* Media query para dispositivos tipo tabletas */
+@media screen and (min-width: 769px) and (max-width: 1500px) {
+    /* Contenedor principal con tamaño fijo */
+    .contenedor-registro {
+        width: 800px; /* Tamaño fijo en píxeles */
+        height: 600px; /* Altura fija */
+    }
+
+    /* Formularios con tamaño específico */
+    .contenedor-formulario h2 {
+        font-size: 2rem; /* Tamaño del encabezado estático */
+    }
+
+    .contenedor-formulario span {
+        font-size: 14px; /* Tamaño fijo para texto descriptivo */
+    }
+
+    .contenedor-input {
+        width: 350px; /* Ancho fijo */
+        height: auto; /* Altura automática */
+        padding: 10px; /* Espaciado interno */
+    }
+
+    .contenedor-input input {
+        font-size: 1rem; /* Texto con tamaño fijo */
+    }
+
+    .boton-formulario {
+        width: 200px; /* Ancho fijo */
+        height: 40px; /* Altura fija */
+        padding: 10px; /* Espaciado interno */
+        font-size: 0.9rem; /* Texto con tamaño definido */
+    }
+
+    /* Sección de bienvenida con tamaño fijo */
+    .contenedor-bienvenida {
+        width: 400px; /* Ancho fijo */
+        height: 600px; /* Altura fija para coincidir con el contenedor principal */
+    }
+
+    .contenedor-bienvenida h3 {
+        font-size: 2rem; /* Encabezado estático */
+    }
+
+    .contenedor-bienvenida p {
+        font-size: 14px; /* Texto descriptivo con tamaño fijo */
+    }
+
+    .contenedor-bienvenida .bienvenida {
+        width: 60%;
+    }
+
+    .logo-sm {
+        top: -100px;
+        width: 100px; /* Tamaño fijo del logo */
+        height: auto; /* Mantiene proporción */
+    }
+}
+
+/* ---------- ESTILOS DE LA PAGINA DE INICIO DE SESION, RECUPERAR CONTRASEÑA Y CONFIRMAR MARCAJE ---------- */
+
+.formulario-inicio-sesion-admin {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    height: 40rem;
+    background: white;
+    border-radius: 3rem;
+    color: black;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInAdmin 1.5s ease-in-out;
+}
+@keyframes fadeInAdmin {
+    0% {
+        opacity: 0; /* Comienza totalmente transparente */
+        transform: translate(-50%, -60%); /* Comienza un poco más arriba */
+    }
+    100% {
+        opacity: 1; /* Termina completamente visible */
+        transform: translate(-50%, -50%); /* Termina centrado */
+    }
+}
+.formulario-inicio-sesion-admin h1 {
+    text-align: center;
+    padding: 1.5rem 0 2rem 0;
+    border-bottom: 1px solid silver;
+}
+.formulario-inicio-sesion-admin h2 {
+    text-align: center;
+}
+.formulario-inicio-sesion-admin p {
+    text-align: center;
+    font-size: 1.8rem;
+}
+.formulario-inicio-sesion-admin form {
+    padding: 0 4rem;
+    box-sizing: border-box;
+}
+form .usuario-admin {
+    width: 30rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #EEEEEE;
+    border-radius: 1rem;
+}
+.usuario-admin input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE;
+}
+.recuperar-contraseña {
+    margin: 20px 0 20px 5px;
+    cursor: pointer;
+}
+input[type="submit"]{
+    width: 100%;
+    height: 3rem;
+    border: none;
+    background: #4169E1;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: 0.5s;
+}
+input[type="submit"]:hover {
+    background: #4169E1;
+    transition: 0.5s;
+}
+.volver-index {
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 18px;
+    color: black;
+}
+.volver-index a {
+    color: black;
+    text-decoration: none;
+}
+.volver-index a:hover {
+    text-decoration: underline;
+}
+.contenedor-img-png {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.recuperar-contraseña a {
+    text-decoration: none;
+    color: black;
+}
+.recuperar-contraseña a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- ESTILOS DE LA PAGINA DE REGISTRO DE INVITADO ---------- */
+
+.formulario-registrar-invitado {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    height: 42rem;
+    color: black;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInAdmin 1.5s ease-in-out;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+}
+@keyframes fadeInAdmin {
+    0% {
+        opacity: 0; /* Comienza totalmente transparente */
+        transform: translate(-50%, -60%); /* Comienza un poco más arriba */
+    }
+    100% {
+        opacity: 1; /* Termina completamente visible */
+        transform: translate(-50%, -50%); /* Termina centrado */
+    }
+}
+.formulario-registrar-invitado h1 {
+    text-align: center;
+    padding: 1.5rem 0 2rem 0;
+    color: white;
+}
+.formulario-registrar-invitado p {
+    text-align: center;
+    font-size: 1.8rem;
+    color: white;
+}
+.formulario-registrar-invitado form {
+    padding: 0 4rem;
+    box-sizing: border-box;
+}
+form .usuario-admin {
+    width: 30rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #EEEEEE;
+    border-radius: 1rem;
+}
+.usuario-admin input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE;
+}
+input[type="submit"]{
+    width: 100%;
+    height: 3rem;
+    border: none;
+    background: #2048d6;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: 0.5s;
+}
+input[type="submit"]:hover {
+    background: #4167ec;
+    transition: 0.5s;
+}
+.formulario-registrar-invitado ion-icon {
+    font-size: 3rem; /* Aumenta el tamaño del icono */
+    color: white;
+}
+.formulario-registrar-invitado .usuario-admin ion-icon {
+    font-size: 1.5rem; /* Aumenta el tamaño del icono */
+    color: black;
+}
+
+/* ------------------------ ESTILOS DE LAS TABLAS DE HISTORIAL DE ACCESO ------------------------ */
+
