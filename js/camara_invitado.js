@@ -1,3 +1,5 @@
+
+// Scrpits encargados del funcionamiento de la cámara lectora del QR
 window.onload = async function () {
     const cameraContainer = document.getElementById("contenedor-camara");
     const cameraStream = document.getElementById("mostrar-camara");
@@ -26,6 +28,7 @@ window.onload = async function () {
         }, 5000);
     };
 
+    // Funciones encargadas de validar el marcaje
     const registrarInvitado = async (contenidoQR) => {
         try {
             const response = await fetch('../php/guardar_invitado.php', {
@@ -66,6 +69,7 @@ window.onload = async function () {
         }
     };
 
+    // Funciones encargadas de validar el QR de empleados
     const scanQR = () => {
         try {
             if (cameraStream.videoWidth === 0 || !cameraStream.srcObject) {
