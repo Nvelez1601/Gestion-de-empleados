@@ -122,7 +122,7 @@ window.detenerCamara = function () {
     }
 };
 
-// Estilos para las notificaciones
+// Estilos mejorados para las notificaciones
 const estiloNotificaciones = document.createElement('style');
 estiloNotificaciones.textContent = `
 .notificacion {
@@ -130,28 +130,36 @@ estiloNotificaciones.textContent = `
     top: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(-100px);
-    padding: 15px 25px;
-    border-radius: 8px;
+    padding: 25px 35px; /* Aumenté el padding para que sea más espacioso */
+    border-radius: 12px; /* Bordes más suaves */
     color: white;
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-size: 20px; /* Texto más grande */
     z-index: 1000;
-    transition: transform 0.3s ease;
-    max-width: 80%;
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transición más fluida */
+    max-width: 90%;
     text-align: left;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más prominente */
     opacity: 0;
     line-height: 1.6;
+    background-color: #000000; /* Fondo oscuro para mejor contraste */
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.4s ease;
 }
 
 .notificacion.exito {
     background-color: #4CAF50;
-    border-left: 5px solid #2E7D32;
+    border-left: 6px solid #2E7D32;
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.9); /* Brillo verde más intenso */
+    animation: glow 1.5s infinite alternate; /* Animación de brillo */
 }
 
 .notificacion.error {
     background-color: #F44336;
-    border-left: 5px solid #C62828;
+    border-left: 6px solid #C62828;
+    box-shadow: 0 0 25px rgba(244, 67, 54, 0.9); /* Brillo rojo más intenso */
+    animation: glow 1.5s infinite alternate; /* Animación de brillo */
 }
 
 .notificacion.mostrar {
@@ -160,7 +168,20 @@ estiloNotificaciones.textContent = `
 }
 
 .notificacion strong {
-    font-weight: 600;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #f1f1f1; /* Hacer el texto en negrita más visible */
+}
+
+/* Animación para el brillo de las notificaciones */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+    }
 }
 `;
 document.head.appendChild(estiloNotificaciones);
+

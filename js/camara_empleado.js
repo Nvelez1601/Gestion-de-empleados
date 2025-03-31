@@ -52,7 +52,6 @@ window.onload = async function () {
                 mostrarNotificacion(`❌ ${resultado.mensaje}`, 'error');
             }
             
-            // Reiniciar cámara después de mostrar notificación
             setTimeout(() => {
                 detenerCamara();
                 location.reload();
@@ -124,7 +123,6 @@ window.onload = async function () {
     }
 };
 
-// Función para detener la cámara
 window.detenerCamara = function () {
     const video = document.getElementById('mostrar-camara');
     if (video.srcObject) {
@@ -132,7 +130,6 @@ window.detenerCamara = function () {
     }
 };
 
-// Estilos para las notificaciones
 const estiloNotificaciones = document.createElement('style');
 estiloNotificaciones.textContent = `
 .notificacion {
@@ -140,32 +137,52 @@ estiloNotificaciones.textContent = `
     top: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(-100px);
-    padding: 15px 25px;
-    border-radius: 8px;
+    padding: 25px 35px;
+    border-radius: 12px;
     color: white;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
     z-index: 1000;
-    transition: transform 0.3s ease;
-    max-width: 80%;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    max-width: 90%;
+    text-align: left;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     opacity: 0;
+    line-height: 1.6;
+    background-color: #000000;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.4s ease;
 }
 
 .notificacion.exito {
     background-color: #4CAF50;
-    border-left: 5px solid #2E7D32;
+    border-left: 6px solid #2E7D32;
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.9);
+    animation: glow 1.5s infinite alternate;
 }
 
 .notificacion.error {
     background-color: #F44336;
-    border-left: 5px solid #C62828;
+    border-left: 6px solid #C62828;
+    box-shadow: 0 0 25px rgba(244, 67, 54, 0.9);
+    animation: glow 1.5s infinite alternate;
 }
 
 .notificacion.mostrar {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
+}
+
+.notificacion strong {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #f1f1f1;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+    100% { box-shadow: 0 0 30px rgba(255, 255, 255, 1); }
 }
 `;
 document.head.appendChild(estiloNotificaciones);
