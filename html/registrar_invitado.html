@@ -96,6 +96,15 @@
                 alert("Por favor, complete todos los campos.");
                 return;
             }
+            else if (nombre.length > 25) {
+                alert("El nombre no puede exceder los 25 caracteres.");
+                return;
+            }
+            else if (!correo.includes('@')) {
+                alert("El correo electrónico no es válido.");
+                return;
+            }
+
 
             console.log("Datos enviados:", { nombre, correo });
 

@@ -15,7 +15,6 @@
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 
 <!DOCTYPE html>
-
 <html lang="es">             <!-- formulario de inicio sesion de empleados -->
     <head>
         <meta charset="UTF-8">
@@ -37,6 +36,23 @@
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        
+        <style>
+            /* Estilos para validación */
+            .contenedor-input.invalido input {
+                border-color: #ff4444;
+                box-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+            }
+            .contenedor-input.invalido ion-icon {
+                color: #ff4444;
+            }
+            .mensaje-error {
+                color: #ff4444;
+                font-size: 0.8rem;
+                margin-top: 5px;
+                display: none;
+            }
+        </style>
     </head>
 
     <!-- Cuerpo de la página -->
@@ -50,20 +66,21 @@
 
             <!-- Historial de entradas y salidas -->
             <div class="contenedor-formulario">
-                <form method="post" action="../php/historial_accesos2.php" class="formulario-inicio-sesion">
+                <form method="post" action="../php/historial_accesos2.php" class="formulario-inicio-sesion" id="form-historial">
 
                     <h2>Historial de accesos</h2>
 
                     <!-- Contenedor para recibir la fecha al buscar en la base de datos -->
                     <div class="controles-historial">
-                        <div class="contenedor-input">
+                        <div class="contenedor-input" id="contenedor-fecha">
                             <ion-icon name="calendar-outline"></ion-icon>
                             <input type="date" 
-                                   id="fecha-historial" 
-                                   name="fecha-historial"
-                                   max="<?php echo date('Y-m-d'); ?>"
-                                   value="<?php echo date('Y-m-d'); ?>"
-                                   required>
+                                id="fecha-historial" 
+                                name="fecha-historial"
+                                max="<?php echo date('Y-m-d'); ?>"
+                                value="<?php echo date('Y-m-d'); ?>"
+                                required>
+                            <div class="mensaje-error" id="fecha-error"></div>
                         </div>
                     </div>
 
@@ -71,8 +88,6 @@
                     <button type="submit" class="btn-buscar">Buscar</button>
                 </form>
             </div>
-
-            
 
             <!-- Formulario registro -->
             <div class="contenedor-formulario">
@@ -131,6 +146,57 @@
                 </div>
             </div>
         </div>
-    </body>
 
+        <script>
+            // Validación en tiempo real
+            document.getElementById('fecha-historial').addEventListener('change', function() {
+                validarFecha(this);
+            });
+            
+            // Validación al enviar el formulario
+            document.querySelector('.formulario-inicio-sesion').addEventListener('submit', function(e) {
+                const fechaInput = document.getElementById('fecha-historial');
+                if (!validarFecha(fechaInput, true)) {
+                    e.preventDefault();
+                }
+            });
+            
+            function validarFecha(input, esEnvio = false) {
+                const contenedor = document.getElementById('contenedor-fecha');
+                const mensajeError = document.getElementById('fecha-error');
+                const fechaSeleccionada = new Date(input.value);
+                const fechaActual = new Date();
+                fechaActual.setHours(0, 0, 0, 0);
+                
+                let valido = true;
+                let mensaje = '';
+                
+                if (!input.value) {
+                    mensaje = 'Por favor seleccione una fecha';
+                    valido = false;
+                } else if (fechaSeleccionada > fechaActual) {
+                    mensaje = 'No puede seleccionar una fecha futura';
+                    valido = false;
+                } else if (fechaSeleccionada < new Date('2020-01-01')) {
+                    mensaje = 'La fecha no puede ser anterior al año 2020';
+                    valido = false;
+                }
+                
+                if (!valido) {
+                    contenedor.classList.add('invalido');
+                    mensajeError.textContent = mensaje;
+                    mensajeError.style.display = 'block';
+                    
+                    if (esEnvio) {
+                        input.focus();
+                    }
+                } else {
+                    contenedor.classList.remove('invalido');
+                    mensajeError.style.display = 'none';
+                }
+                
+                return valido;
+            }
+        </script>
+    </body>
 </html>
