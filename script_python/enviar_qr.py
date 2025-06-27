@@ -45,8 +45,11 @@ def enviar_qr():
         print("QR guardado como:", qr_filename)  # Log para el archivo QR
 
         # Configurar el correo
-        email_sender = "nvelezcuauro@gmail.com"
-        email_password = "rrwc ejnm jqme jepl"
+        email_sender = #CONFIGURAR AQUÍ TU CORREO ELECTRÓNICO
+        email_password = #CONFIGURAR AQUÍ TU CONTRASEÑA DE CORREO ELECTRÓNICO
+        if not email_sender or not email_password:
+            print("Faltan credenciales de correo")  # Log para credenciales faltantes
+            return jsonify({'error': 'Faltan credenciales de correo'}), 400
         smtp_server = "smtp.gmail.com"
         smtp_port = 587
 

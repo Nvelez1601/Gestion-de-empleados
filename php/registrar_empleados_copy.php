@@ -86,8 +86,8 @@
                                     $mail->isSMTP();
                                     $mail->Host = 'smtp.gmail.com';   // Servidor SMTP
                                     $mail->SMTPAuth = true;
-                                    $mail->Username = 'nvelezcuauro@gmail.com';  
-                                    $mail->Password = 'rrwc ejnm jqme jepl'; 
+                                    $mail->Username = //CORREO QUE DESEA UTILIZAR PARA ENVIAR EL CORREO 
+                                    $mail->Password = //CONTRASEÑA DEL CORREO QUE DESEA UTILIZAR PARA ENVIAR EL CORREO 
                                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                                     $mail->Port = 587;
                                     
