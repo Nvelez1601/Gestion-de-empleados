@@ -1,6 +1,6 @@
 # Gestion-de-empleados
 
-(https://i.imgur.com/Yn4rpxG.png)
+![img](https://i.imgur.com/Yn4rpxG.png)
 
 Sistema que gestiona la actividad de los empleados de una empresa.
 
