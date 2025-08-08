@@ -1,4 +1,7 @@
 # Gestion-de-empleados
+
+(https://i.imgur.com/Yn4rpxG.png)
+
 Sistema que gestiona la actividad de los empleados de una empresa.
 
 Se deben descargar todos los querimientos del archivo txt "requiriments" para entrar a la carpeta de "script_python"y correr este archivo para que puedan enviarse los correos electronicos. Debe tener instalado PHP en su equipo para poder correr el backend, ya que esta conectado con PHP.
